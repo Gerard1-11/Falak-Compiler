@@ -4,7 +4,7 @@
   Copyright (C) 2021, ITESM CEM
 
   Luis Daniel Rivera Salinas  - A01374997
-  Ricardo David Zambrano Figueroa - A
+  Ricardo David Zambrano Figueroa - A1379700
   Gerardo Arturo Valderrama Quiroz - A01374994
 
   This program is free software: you can redistribute it and/or modify
