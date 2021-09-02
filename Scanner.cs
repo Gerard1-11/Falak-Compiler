@@ -1,11 +1,11 @@
 /*
-  Buttercup compiler - This class performs the lexical analysis,
+  Falak compiler - This class performs the lexical analysis,
   (a.k.a. scanning).
   Falak compiler - Program driver.
   Copyright (C) 2021, ITESM CEM
 
   Luis Daniel Rivera Salinas  - A01374997
-  Ricardo David Zambrano Figueroa - A
+  Ricardo David Zambrano Figueroa - A1379700
   Gerardo Arturo Valderrama Quiroz - A01374994
 
   This program is free software: you can redistribute it and/or modify
@@ -34,7 +34,38 @@ namespace Fal {
 
         static readonly Regex regex = new Regex(
             @"
-                (?<Comment>    ;.*       )
+                (?<MComment> ([<][#](.|\n)*?[#][>]) )
+              | (?<SComment>   [#].* )          
+              
+              | (?<Break>      break\b     )
+              | (?<Dec>        dec\b       )
+              | (?<Do>         do\b        )
+              | (?<Elseif>       elseif\b      )
+              | (?<False>      false\b     )
+              | (?<If>         if\b        )
+              | (?<Inc>        inc\b       )
+              | (?<Return>     return\b    )
+              | (?<True>       true\b      )
+              | (?<Var>        var\b       )
+              | (?<While>      while\b     )
+
+              | (?<lit-int> (-)?\d+       )
+              | (?<lit-char>    [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
+              | (?<lit-str>  [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
+
+              | (?<Semicolon>  [;]       )
+              | (?<Coma>       [,]       )
+              | (?<ParLeft>    [(]       )
+              | (?<ParRight>   [)]       )
+              | (?<CurlyRight>  [}]      )
+              | (?<CurlyLeft>   [{]      )
+              | (?<SBracketL>  [\[]      )
+              | (?<SBracketR>  [\]]      )
+              | (?<Assign>     [=]       )
+              | (?<Or>       [|][|]      )
+              | (?<Xor>       [^]        )
+
+
               | (?<Newline>    \n        )
               | (?<WhiteSpace> \s        )     # Must go after Newline.
               | (?<And>        [&]       )
@@ -54,7 +85,7 @@ namespace Fal {
               | (?<Int>        int\b     )
               | (?<Print>      print\b   )
               | (?<Then>       then\b    )
-              | (?<Identifier> [a-zA-Z]+ )     # Must go after all keywords
+              | (?<Identifier> [a-zA-Z]{1}[a-zA-Z_0-9]* )     # Must go after all keywords
               | (?<Other>      .         )     # Must be last: match any other character.
             ",
             RegexOptions.IgnorePatternWhitespace
