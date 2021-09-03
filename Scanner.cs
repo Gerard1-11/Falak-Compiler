@@ -35,12 +35,27 @@ namespace Fal {
         static readonly Regex regex = new Regex(
             @"
                 (?<MComment> ([<][#](.|\n)*?[#][>]) )
-              | (?<SComment>   [#].* )          
-              
+              | (?<SComment>   [#].*       )
+              | (?<Eqto>       [=][=]      )
+              | (?<Assign>     [=]         )
+              | (?<LessEqual>  [<][=]      )
+              | (?<LessThan>   [<]         )
+              | (?<MoreEqual>  [>][=]      )
+              | (?<MoreThan>   [>]         )
+              | (?<Plus>       [+]         )
+              | (?<Neg>        [-]         )
+              | (?<Mul>        [*]         )
+              | (?<Div>        [/]         )
+              | (?<Mod>        [%]         )   
+              | (?<Or>         [|][|]      )
+              | (?<Xor>        [^]         )
+              | (?<And>        [&][&]      )
+              | (?<NotEqTo>    [!][=]      )
+              | (?<Not)        [!]         )
               | (?<Break>      break\b     )
               | (?<Dec>        dec\b       )
               | (?<Do>         do\b        )
-              | (?<Elseif>       elseif\b      )
+              | (?<Elseif>     elseif\b    )
               | (?<False>      false\b     )
               | (?<If>         if\b        )
               | (?<Inc>        inc\b       )
@@ -48,45 +63,27 @@ namespace Fal {
               | (?<True>       true\b      )
               | (?<Var>        var\b       )
               | (?<While>      while\b     )
-
-              | (?<lit-int> (-)?\d+       )
-              | (?<lit-char>    [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
-              | (?<lit-str>  [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
-
-              | (?<Semicolon>  [;]       )
-              | (?<Coma>       [,]       )
-              | (?<ParLeft>    [(]       )
-              | (?<ParRight>   [)]       )
-              | (?<CurlyRight>  [}]      )
-              | (?<CurlyLeft>   [{]      )
-              | (?<SBracketL>  [\[]      )
-              | (?<SBracketR>  [\]]      )
-              | (?<Assign>     [=]       )
-              | (?<Or>       [|][|]      )
-              | (?<Xor>       [^]        )
-
-
-              | (?<Newline>    \n        )
-              | (?<WhiteSpace> \s        )     # Must go after Newline.
-              | (?<And>        [&]       )
-              | (?<Less>       [<]       )
-              | (?<Plus>       [+]       )
-              | (?<Mul>        [*]       )
-              | (?<Neg>        [-]       )
-              | (?<ParLeft>    [(]       )
-              | (?<ParRight>   [)]       )
-              | (?<Assign>     [=]       )
-              | (?<True>       [#]t      )
-              | (?<False>      [#]f      )
-              | (?<IntLiteral> \d+       )
-              | (?<Bool>       bool\b    )
-              | (?<End>        end\b     )
-              | (?<If>         if\b      )
-              | (?<Int>        int\b     )
-              | (?<Print>      print\b   )
-              | (?<Then>       then\b    )
+              | (?<Semicolon>  [;]         )
+              | (?<Coma>       [,]         )
+              | (?<ParLeft>    [(]         )
+              | (?<ParRight>   [)]         )
+              | (?<CurlyRight> [}]         )
+              | (?<CurlyLeft>  [{]         )
+              | (?<SBracketL>  [\[]        )
+              | (?<SBracketR>  [\]]        )
+              | (?<lit-char>   [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
+              | (?<lit-str>    [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
+              | (?<lit-int>    (-)?\d+     )
+              
+              | (?<Newline>    \n          )
+              | (?<WhiteSpace> \s          )     # Must go after Newline.
+              | (?<Carriage>   \r          )
+              | (?<Backlash>   [\\]        )
+              | (?<Tab>        \t          )
+              | (?<Print>      print\b     )
+              
               | (?<Identifier> [a-zA-Z]{1}[a-zA-Z_0-9]* )     # Must go after all keywords
-              | (?<Other>      .         )     # Must be last: match any other character.
+              | (?<Other>      .           )     # Must be last: match any other character.
             ",
             RegexOptions.IgnorePatternWhitespace
                 | RegexOptions.Compiled
@@ -95,24 +92,46 @@ namespace Fal {
 
         static readonly IDictionary<string, TokenCategory> tokenMap =
             new Dictionary<string, TokenCategory>() {
-                {"And", TokenCategory.AND},
-                {"Less", TokenCategory.LESS},
-                {"Plus", TokenCategory.PLUS},
-                {"Mul", TokenCategory.MUL},
-                {"Neg", TokenCategory.NEG},
-                {"ParLeft", TokenCategory.PARENTHESIS_OPEN},
-                {"ParRight", TokenCategory.PARENTHESIS_CLOSE},
+                {"Eqto", TokenCategory.EQUAL_TO},
                 {"Assign", TokenCategory.ASSIGN},
-                {"True", TokenCategory.TRUE},
+                {"LessEqual", TokenCategory.LESS_EQUAL},
+                {"LessThan", TokenCategory.LESS_THAN},
+                {"MoreEqual", TokenCategory.MORE_EQUAL},
+                {"MoreThan", TokenCategory.MORE_THAN},
+                {"Plus", TokenCategory.PLUS},
+                {"Neg", TokenCategory.NEG},
+                {"Mul", TokenCategory.MUL},
+                {"Div", TokenCategory.DIV},
+                {"Mod", TokenCategory.MOD},
+                {"Or", TokenCategory.OR},
+                {"Xor", TokenCategory.XOR},
+                {"And", TokenCategory.AND},
+                {"NotEqTo", TokenCategory.NOT_EQUAL_TO},
+                {"Not", TokenCategory.NOT},
+                {"Break", TokenCategory.BREAK},
+                {"Dec", TokenCategory.DEC},
+                {"Do", TokenCategory.DO},
+                {"Elseif", TokenCategory.ELSEIF},
                 {"False", TokenCategory.FALSE},
-                {"IntLiteral", TokenCategory.INT_LITERAL},
-                {"Bool", TokenCategory.BOOL},
-                {"End", TokenCategory.END},
                 {"If", TokenCategory.IF},
-                {"Int", TokenCategory.INT},
-                {"Print", TokenCategory.PRINT},
-                {"Then", TokenCategory.THEN},
-                {"Identifier", TokenCategory.IDENTIFIER}
+                {"Inc", TokenCategory.INC},
+                {"Return", TokenCategory.RETURN},
+                {"True", TokenCategory.TRUE},
+                {"Var", TokenCategory.VAR},
+                {"While", TokenCategory.WHILE},
+                {"Semicolon", TokenCategory.SEMICOLON},
+                {"Coma", TokenCategory.COMA},
+                {"ParLeft", TokenCategory.PARENTHESIS_LEFT},
+                {"ParRight", TokenCategory.PARENTHESIS_RIGHT},
+                {"CurlyLeft", TokenCategory.CURLY_LEFT},
+                {"CurlyRight", TokenCategory.CURLY_RIGHT},
+                {"SBracketL", TokenCategory.SQUARE_BRACKET_LEFT},
+                {"SBracketR", TokenCategory.SQUARE_BRACKET_RIGHT},
+                {"lit-char", TokenCategory.LIT_CHARACTER},
+                {"lit-str", TokenCategory.LIT_STRING},
+                {"lit-int", TokenCategory.LIT_INTEGER},
+                {"Identifier", TokenCategory.IDENTIFIER},
+                {"Print", TokenCategory.PRINT}
             };
 
         public Scanner(string input) {
