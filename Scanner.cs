@@ -26,7 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Fal {
+namespace Falak {
 
     class Scanner {
 
