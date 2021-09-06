@@ -36,6 +36,8 @@ namespace Fal {
             @"
                 (?<MComment> ([<][#](.|\n)*?[#][>]) )
               | (?<SComment>   [#].*       )
+              | (?<Newline>    \n          )
+              | (?<WhiteSpace> \s          )     # Must go after Newline.
               | (?<Eqto>       [=][=]      )
               | (?<Assign>     [=]         )
               | (?<LessEqual>  [<][=]      )
@@ -74,14 +76,6 @@ namespace Fal {
               | (?<lit-char>   [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
               | (?<lit-str>    [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
               | (?<lit-int>    (-)?\d+     )
-              
-              | (?<Newline>    \n          )
-              | (?<WhiteSpace> \s          )     # Must go after Newline.
-              | (?<Carriage>   \r          )
-              | (?<Backlash>   [\\]        )
-              | (?<Tab>        \t          )
-              | (?<Print>      print\b     )
-              
               | (?<Identifier> [a-zA-Z]{1}[a-zA-Z_0-9]* )     # Must go after all keywords
               | (?<Other>      .           )     # Must be last: match any other character.
             ",
@@ -130,8 +124,8 @@ namespace Fal {
                 {"lit-char", TokenCategory.LIT_CHARACTER},
                 {"lit-str", TokenCategory.LIT_STRING},
                 {"lit-int", TokenCategory.LIT_INTEGER},
-                {"Identifier", TokenCategory.IDENTIFIER},
-                {"Print", TokenCategory.PRINT}
+                {"Identifier", TokenCategory.IDENTIFIER}
+            
             };
 
         public Scanner(string input) {
@@ -152,11 +146,23 @@ namespace Fal {
                     columnStart = m.Index + m.Length;
 
                 } else if (m.Groups["WhiteSpace"].Success
-                    || m.Groups["Comment"].Success) {
+                    || m.Groups["SComment"].Success) {
 
                     // Skip white space and comments.
 
-                } else if (m.Groups["Other"].Success) {
+                }
+                else if(m.Groups["MComment"].Success){ 
+
+                     MatchCollection newMatches = Regex.Matches(m.Groups ["MComment"].Value, "\n", RegexOptions.Multiline);
+
+                    if(newMatches.Count > 0){
+                        Match lastMatch = newMatches[newMatches.Count - 1];
+                        row += newMatches.Count;
+                        columnStart = m.Index + lastMatch.Index + lastMatch.Length;
+                    }
+
+                }
+                 else if (m.Groups["Other"].Success) {
 
                     // Found an illegal character.
                     result.AddLast(

@@ -65,7 +65,6 @@ namespace Falak {
         LIT_INTEGER,
         
         IDENTIFIER,
-        PRINT,
         ILLEGAL_CHAR
     }
 }
