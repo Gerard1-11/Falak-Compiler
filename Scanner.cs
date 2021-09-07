@@ -121,9 +121,9 @@ namespace Falak {
                 {"CurlyRight", TokenCategory.CURLY_RIGHT},
                 {"SBracketL", TokenCategory.SQUARE_BRACKET_LEFT},
                 {"SBracketR", TokenCategory.SQUARE_BRACKET_RIGHT},
-                {"lit-char", TokenCategory.LIT_CHARACTER},
-                {"lit-str", TokenCategory.LIT_STRING},
-                {"lit-int", TokenCategory.LIT_INTEGER},
+                {"litChar", TokenCategory.LIT_CHARACTER},
+                {"litStr", TokenCategory.LIT_STRING},
+                {"litInt", TokenCategory.LIT_INTEGER},
                 {"Identifier", TokenCategory.IDENTIFIER}
             
             };
