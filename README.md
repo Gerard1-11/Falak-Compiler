@@ -20,8 +20,9 @@ At the terminal type:
 
 Where `<falak_source_file>` is the name of a Buttercup source file. You can try with these files:
 
-* `prog1.bcup`
-* `prog2.bcup`
+* `001_hello.falak`
+* `002_binary.falak`
+* `003_palindrome.falak`
 
 ## How to Clean
 
