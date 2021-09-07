@@ -53,7 +53,7 @@ namespace Falak {
               | (?<Xor>        [^]         )
               | (?<And>        [&][&]      )
               | (?<NotEqTo>    [!][=]      )
-              | (?<Not)        [!]         )
+              | (?<Not>        [!]         )
               | (?<Break>      break\b     )
               | (?<Dec>        dec\b       )
               | (?<Do>         do\b        )
@@ -73,9 +73,9 @@ namespace Falak {
               | (?<CurlyLeft>  [{]         )
               | (?<SBracketL>  [\[]        )
               | (?<SBracketR>  [\]]        )
-              | (?<lit-char>   [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
-              | (?<lit-str>    [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
-              | (?<lit-int>    (-)?\d+     )
+              | (?<litChar>   [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
+              | (?<litStr>    [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
+              | (?<litInt>    (-)?\d+     )
               | (?<Identifier> [a-zA-Z]{1}[a-zA-Z_0-9]* )     # Must go after all keywords
               | (?<Other>      .           )     # Must be last: match any other character.
             ",
