@@ -23,6 +23,7 @@ Where `<falak_source_file>` is the name of a Buttercup source file. You can try 
 * `001_hello.falak`
 * `002_binary.falak`
 * `003_palindrome.falak`
+* `005_arrays.falak`
 
 ## How to Clean
 

@@ -76,7 +76,7 @@ namespace Falak {
               | (?<litChar>   [']([\\](u[\dA-Fa-f]{6}|[nrt\'\\""])|[^\n'\\])['] )
               | (?<litStr>    [""]([\\](u[0-9A-Fa-f]{6}|[nrt\'\\""])|[^\n""\\])*[""] )
               | (?<litInt>    (-)?\d+     )
-              | (?<Identifier> [a-zA-Z]{1}[a-zA-Z_0-9]* )     # Must go after all keywords
+              | (?<Identifier> [a-zA-Z][a-zA-Z_0-9]* )     # Must go after all keywords
               | (?<Other>      .           )     # Must be last: match any other character.
             ",
             RegexOptions.IgnorePatternWhitespace

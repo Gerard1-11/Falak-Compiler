@@ -1,6 +1,5 @@
 /*
-  Buttercup compiler - Token class for the scanner.
-  Falak compiler - Program driver.
+  Falak compiler - Token class for the scanner.
   Copyright (C) 2021, ITESM CEM
 
   Luis Daniel Rivera Salinas  - A01374997
