@@ -58,6 +58,7 @@ namespace Falak {
               | (?<Dec>        dec\b       )
               | (?<Do>         do\b        )
               | (?<Elseif>     elseif\b    )
+              | (?<Else>       else\b      )
               | (?<False>      false\b     )
               | (?<If>         if\b        )
               | (?<Inc>        inc\b       )
@@ -106,6 +107,7 @@ namespace Falak {
                 {"Dec", TokenCategory.DEC},
                 {"Do", TokenCategory.DO},
                 {"Elseif", TokenCategory.ELSEIF},
+                {"Else", TokenCategory.ELSE},
                 {"False", TokenCategory.FALSE},
                 {"If", TokenCategory.IF},
                 {"Inc", TokenCategory.INC},

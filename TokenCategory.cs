@@ -44,6 +44,7 @@ namespace Falak {
         DEC,
         DO,
         ELSEIF,
+        ELSE,
         FALSE,
         IF,
         INC,
