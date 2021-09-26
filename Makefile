@@ -20,11 +20,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-buttercup.exe: Driver.cs Scanner.cs Token.cs TokenCategory.cs Parser.cs \ 
-	SyntaxError.cs
+falak.exe: Driver.cs Scanner.cs Token.cs TokenCategory.cs Parser.cs SyntaxError.cs
 
-	mcs -out:falak.exe Driver.cs Scanner.cs Token.cs TokenCategory.cs \ Parser.cs
-	SyntaxError.cs
+	mcs -out:falak.exe Driver.cs Scanner.cs Token.cs TokenCategory.cs Parser.cs SyntaxError.cs
 
 clean:
 
