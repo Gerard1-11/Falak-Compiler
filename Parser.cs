@@ -1,6 +1,6 @@
 /*
   Falak compiler - This class performs the syntactical analysis,
-  (a.k.a. parsing). :D
+  (a.k.a. parsing). :D :D
   Copyright (C) 2021, ITESM CEM
 
   Luis Daniel Rivera Salinas  - A01374997
