@@ -137,27 +137,31 @@ namespace Falak {
             }
         }
 
-        public void Program(){
-           Def_List();
+        public Node Program(){
+           var program = Def_List();
            Expect(TokenCategory.EOF); 
+           var newNode = new Program();
+           newNode.Add(program);
+           return newNode;
        }
 
-       public void Def_List(){
+       public Node Def_List(){
+           var defList = new DefinitionList();
            while (firstOfDefinition.Contains(CurrentToken)){
-               Definition();
+               var definition = Definition();
+               defList.Add(definition);
            }
+           return defList;
        } 
 
-       public void Definition(){
+       public Node Definition(){
            switch (CurrentToken) {
 
             case TokenCategory.IDENTIFIER:
-                 Fun_Def();
-                 break;
+                 return Fun_Def();
 
             case TokenCategory.VAR:
-                 Var_Def();
-                 break;
+                 return Var_Def();
 
             default:
                 throw new SyntaxError(firstOfDefinition,
@@ -556,47 +560,58 @@ namespace Falak {
             }
         }
 
-        public void Expr_Primary(){
+        public Node Expr_Primary(){
             switch (CurrentToken) {
 
             case TokenCategory.IDENTIFIER:
-                Expect(TokenCategory.IDENTIFIER);
+               var token =  Expect(TokenCategory.IDENTIFIER);
                     if(CurrentToken == TokenCategory.PARENTHESIS_LEFT){
+                        var result = new FunCall();
+                        result.AnchorToken = token;
                         Expect(TokenCategory.PARENTHESIS_LEFT);
-                        Expr_List();
+                        result.Add(Expr_List());
                         Expect(TokenCategory.PARENTHESIS_RIGHT);
+                        return result;
+                    }else{
+                        var result = new VarRef();
+                        result.AnchorToken = token;
+                        return result;
                     }
-                break;
+                
 
             case TokenCategory.SQUARE_BRACKET_LEFT:
                Array();
-               break;
 
             case TokenCategory.TRUE:
-               Expect(TokenCategory.TRUE);
-               break;
+                return new True{
+                AnchorToken = Expect(TokenCategory.TRUE)
+               };
 
             case TokenCategory.FALSE:
-               Expect(TokenCategory.FALSE);
-               break;
+               return new False{
+                AnchorToken = Expect(TokenCategory.FALSE)
+               };
 
             case TokenCategory.LIT_INTEGER:
-               Expect(TokenCategory.LIT_INTEGER);
-               break;
+               return new Lit_Integer{
+                AnchorToken = Expect(TokenCategory.LIT_INTEGER)
+               };
 
             case TokenCategory.LIT_CHARACTER:
-               Expect(TokenCategory.LIT_CHARACTER);
-               break;
+                return new Lit_Character{
+                AnchorToken = Expect(TokenCategory.LIT_CHARACTER)
+               };
 
             case TokenCategory.LIT_STRING:
-               Expect(TokenCategory.LIT_STRING);
-               break;
+                return new Lit_String{
+                AnchorToken = Expect(TokenCategory.LIT_STRING)
+               };
 
             case TokenCategory.PARENTHESIS_LEFT:
                Expect(TokenCategory.PARENTHESIS_LEFT);
-               Expr();
+               var result3 = Expr();
                Expect(TokenCategory.PARENTHESIS_RIGHT);
-               break;
+               return result3;
 
             default:
                 throw new SyntaxError(firstOfPrimaryExpr,
@@ -604,10 +619,12 @@ namespace Falak {
             }
         }
 
-        public void Array(){
+        public Node Array(){
             Expect(TokenCategory.SQUARE_BRACKET_LEFT);
-            Expr_List();
+            var result2 = new LitArray();
+            result2.Add(Expr_List());
             Expect(TokenCategory.SQUARE_BRACKET_RIGHT);
+            return result2;
         }
     
     }
