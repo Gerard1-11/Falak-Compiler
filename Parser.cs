@@ -339,65 +339,88 @@ namespace Falak {
             Expect(TokenCategory.CURLY_RIGHT);
         }
 
-        public void Stmt_Do_While(){
-            Expect(TokenCategory.DO);
+        public Node Stmt_Do_While(){
+            var doToken = Expect(TokenCategory.DO);
             Expect(TokenCategory.CURLY_LEFT);
-            Stmt_List();
+            var stmtList = Stmt_List();
             Expect(TokenCategory.CURLY_RIGHT);
             Expect(TokenCategory.WHILE);
             Expect(TokenCategory.PARENTHESIS_LEFT);
-            Expr();
+            var expr1 = Expr();
             Expect(TokenCategory.PARENTHESIS_RIGHT);
             Expect(TokenCategory.SEMICOLON);
+            var result = new StatementDoWhile(){stmtList, expr1};
+			result.AnchorToken = doToken;
+			return result;
         }
 
-        public void Stmt_Break(){
-            Expect(TokenCategory.BREAK);
+        public Node Stmt_Break(){
+            var breakToken = Expect(TokenCategory.BREAK);
             Expect(TokenCategory.SEMICOLON);
+            var result = new StatementBreak();
+            result.AnchorToken = breakToken;
+            return result;
         }
 
-        public void Stmt_Return(){
-            Expect(TokenCategory.RETURN);
-            Expr();
+        public Node Stmt_Return(){
+            var returnToken = Expect(TokenCategory.RETURN);
+            var expr1 = Expr();
             Expect(TokenCategory.SEMICOLON);
+            var result = new StatementReturn(){expr1};
+            result.AnchorToken = returnToken;
+            return result;
         }
 
-        public void Stmt_Empty(){
-            Expect(TokenCategory.SEMICOLON);
+        public Node Stmt_Empty(){
+            var result = new Empty();{
+                Expect(TokenCategory.SEMICOLON);
+            }
         }
 
-        public void Expr_List(){
+        public Node Expr_List(){
+            var exprList = new ExpressionList();
             if(firstOfSuperExpression.Contains(CurrentToken)){
-                Expr();
+                var expr1 = Expr();
+                exprList.Add(expr1);
                 while(CurrentToken == TokenCategory.COMA){
                     Expect(TokenCategory.COMA);
-                    Expr();
+                    var newExpr = Expr();
+                    exprList.Add(newExpr);
                 }
             }
+            return exprList;
         }
 
-        public void Expr(){
-            Expr_Or();
+        public Node Expr(){
+            var result = Expr_Or();
+            return result;
         }
 
-        public void Expr_Or(){
-            Expr_And();
+        public Node Expr_Or(){
+            var result = Expr_And();
             while(firstOfBinaryExpr.Contains(CurrentToken)){
-                Op_Or();
-                Expr_And();
+                var idToken = Op_Or();
+                var newOr = new Or();
+                newOr.Add(result);
+                newOr.Add(Expr_And());
+                newOr.AnchorToken = idToken;
+                result = newOr;
             }
+            return result;
         }
 
-        public void Op_Or(){
+        public Node Op_Or(){
             switch (CurrentToken) {
 
             case TokenCategory.OR:
-                Expect(TokenCategory.OR);
-                break;
+                return new Or(){
+                   AnchorToken = Expect(TokenCategory.OR)
+                };
 
             case TokenCategory.XOR:
-               Expect(TokenCategory.XOR);
-               break;
+               return new Xor(){
+                   AnchorToken = Expect(TokenCategory.XOR)
+               };
 
             default:
                 throw new SyntaxError(firstOfBinaryExpr,
@@ -405,32 +428,42 @@ namespace Falak {
             }
         }
 
-        public void Expr_And(){
-            Expr_Comp();
+        public Node Expr_And(){
+            var result = Expr_Comp();
             while(CurrentToken == TokenCategory.AND){
-                    Expect(TokenCategory.AND);
-                    Expr_Comp();
+                    var idToken = Expect(TokenCategory.AND);
+                    var newAnd = new And();
+                    newAnd.Add(result);
+                    newAnd.Add(Expr_Comp());
+                    newAnd.AnchorToken = idToken;
+                    result = newAnd;
             }
+            return result;
         }
 
-        public void Expr_Comp(){
-            Expr_Rel();
+        public Node Expr_Comp(){
+            var expr1 = Expr_Rel();
             while(firstOfCompare.Contains(CurrentToken)){
-                Op_Comp();
-                Expr_Rel();
+                var expr2 = Op_Comp();
+                expr2.Add(expr1);
+                expr2.Add(Expr_Rel());
+                expr1 = expr2;
             }
+            return expr1;
         }
 
-        public void Op_Comp(){
+        public Node Op_Comp(){
             switch (CurrentToken) {
 
             case TokenCategory.EQUAL_TO:
-                Expect(TokenCategory.EQUAL_TO);
-                break;
+                return new EqualTo(){
+                    AnchorToken = Expect(TokenCategory.EQUAL_TO)
+                };
 
             case TokenCategory.NOT_EQUAL_TO:
-               Expect(TokenCategory.NOT_EQUAL_TO);
-               break;
+               return new NotEqualTo(){
+                   AnchorToken = Expect(TokenCategory.NOT_EQUAL_TO)
+               };
 
             default:
                 throw new SyntaxError(firstOfCompare,
