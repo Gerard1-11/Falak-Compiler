@@ -138,18 +138,18 @@ namespace Falak {
         }
 
         public Node Program(){
-           var program = Def_List();
+           var result = Def_List();
            Expect(TokenCategory.EOF); 
            var newNode = new Program();
-           newNode.Add(program);
+           newNode.Add(result);
            return newNode;
        }
 
        public Node Def_List(){
            var defList = new DefinitionList();
            while (firstOfDefinition.Contains(CurrentToken)){
-               var definition = Definition();
-               defList.Add(definition);
+               var expr1 = Definition();
+               defList.Add(expr1);
            }
            return defList;
        } 
@@ -438,32 +438,39 @@ namespace Falak {
             }
         }
 
-        public void Expr_Rel(){
-            Expr_Add();
+        public Node Expr_Rel(){
+            var expr1 = Expr_Add();
             while(firstOfRelation.Contains(CurrentToken)){
-                Op_Rel();
-                Expr_Add();
+                var expr2 = Op_Rel();
+                expr2.Add(expr1);
+                expr2.Add(Expr_Add());
+                expr1 = expr2;
             }
+            return expr2;
         }
 
-        public void Op_Rel(){
+        public Node Op_Rel(){
             switch (CurrentToken) {
 
             case TokenCategory.MORE_THAN:
-                Expect(TokenCategory.MORE_THAN);
-                break;
+                return new MoreThan(){
+                    AnchorToken = Expect(TokenCategory.MORE_THAN)
+                };
 
             case TokenCategory.MORE_EQUAL:
-               Expect(TokenCategory.MORE_EQUAL);
-               break;
-            
+                return new MoreEqual(){
+                    AnchorToken = Expect(TokenCategory.MORE_EQUAL)
+                };
+               
             case TokenCategory.LESS_THAN:
-                Expect(TokenCategory.LESS_THAN);
-                break;
+                return new LessThan(){
+                    AnchorToken = Expect(TokenCategory.LESS_THAN)
+                };
 
             case TokenCategory.LESS_EQUAL:
-               Expect(TokenCategory.LESS_EQUAL);
-               break;
+               return new LessEqual(){
+                    Expect(TokenCategory.LESS_EQUAL)
+                };
 
             default:
                 throw new SyntaxError(firstOfRelation,
@@ -471,24 +478,29 @@ namespace Falak {
             }
         }
 
-        public void Expr_Add(){
-            Expr_Mul();
+        public Node Expr_Add(){
+            var expr1 = Expr_Mul();
             while(firstOfAddition.Contains(CurrentToken)){
-                Op_Add();
-                Expr_Mul();
+                var expr2 = Op_Add();
+                expr2.Add(expr1);
+                expr2.Add(Expr_Mul());
+                expr1 = expr1;
             }
+            return expr1;
         }
 
-        public void Op_Add(){
+        public Node Op_Add(){
             switch (CurrentToken) {
 
             case TokenCategory.PLUS:
-                Expect(TokenCategory.PLUS);
-                break;
+                return new Plus(){
+                    AnchorToken = Expect(TokenCategory.PLUS)
+                };
 
             case TokenCategory.NEG:
-               Expect(TokenCategory.NEG);
-               break;
+               return new Neg(){
+                    AnchorToken = Expect(TokenCategory.NEG)
+                };
 
             default:
                 throw new SyntaxError(firstOfAddition,
@@ -496,28 +508,34 @@ namespace Falak {
             }
         }
 
-        public void Expr_Mul(){
-            Expr_Unary();
+        public Node Expr_Mul(){
+            var expr1 = Expr_Unary();
             while(firstOfMultiplication.Contains(CurrentToken)){
-                Op_Mul();
-                Expr_Unary();
+                var expr2 = Op_Mul();
+                expr2.Add(expr1);
+                expr2.Add(Expr_Unary());
+                expr1 = expr2;
             }
+            return expr1;
         }
 
-        public void Op_Mul(){
+        public Node Op_Mul(){
             switch (CurrentToken) {
 
             case TokenCategory.MUL:
-                Expect(TokenCategory.MUL);
-                break;
+               return new Mul(){
+                   AnchorToken =  Expect(TokenCategory.MUL)
+               };
             
             case TokenCategory.DIV:
-                Expect(TokenCategory.DIV);
-                break;
+                return new Div(){
+                    AnchorToken = Expect(TokenCategory.DIV)
+                };
 
             case TokenCategory.MOD:
-               Expect(TokenCategory.MOD);
-               break;
+               return new Mod(){
+                   AnchorToken = Expect(TokenCategory.MOD)
+               };
 
             default:
                 throw new SyntaxError(firstOfMultiplication,
@@ -525,13 +543,15 @@ namespace Falak {
             }
         }
 
-        public void Expr_Unary(){
+        public Node Expr_Unary(){
             if(firstOfUnary.Contains(CurrentToken)){
-                Op_Unary();
-                Expr_Unary();
+                var result = Op_Unary();
+                result.Add(Expr_Unary());
+                return result;
                 
             }else if(firstOfSuperExpression.Contains(CurrentToken)){
-                Expr_Primary();
+                var result = Expr_Primary();
+                return result;
                 
             }else{
                 throw new SyntaxError(firstOfUnary,
@@ -539,20 +559,23 @@ namespace Falak {
             }
         }
 
-        public void Op_Unary(){
+        public Node Op_Unary(){
             switch (CurrentToken) {
 
             case TokenCategory.PLUS:
-                Expect(TokenCategory.PLUS);
-                break;
+                return new Plus(){
+                    AnchorToken = Expect(TokenCategory.PLUS)
+                };
 
             case TokenCategory.NEG:
-               Expect(TokenCategory.NEG);
-               break;
+               return new Neg(){
+                    AnchorToken = Expect(TokenCategory.NEG)
+                };
 
             case TokenCategory.NOT:
-               Expect(TokenCategory.NOT);
-               break;
+               return new Not(){
+                    AnchorToken = Expect(TokenCategory.NOT)
+                };
 
             default:
                 throw new SyntaxError(firstOfUnary,
