@@ -308,35 +308,49 @@ namespace Falak {
             Else();
         }
 
-        public void Else_If_List(){
+        public Node Else_If_List(){
+            var result = new ElseIfList();
             while(CurrentToken == TokenCategory.ELSEIF){
-                    Expect(TokenCategory.ELSEIF);
+                    var elifToken = Expect(TokenCategory.ELSEIF);
                     Expect(TokenCategory.PARENTHESIS_LEFT);
-                    Expr();
+                    while(firstOfPrimaryExpr.Contains(CurrentToken)){
+                        var expr = Expr();
+                        result.Add(expr);
+                        result.AnchorToken = elifToken;
+                    }
                     Expect(TokenCategory.PARENTHESIS_RIGHT);
                     Expect(TokenCategory.CURLY_LEFT);
-                    Stmt_List();
+                    var stmtList = Stmt_List();
+                    result.Add(stmtList);
                     Expect(TokenCategory.CURLY_RIGHT);
                }
+               return result;
         }
 
-        public void Else(){
+        public Node Else(){
+            var result = new Else();
             if(CurrentToken == TokenCategory.ELSE){
-                Expect(TokenCategory.ELSE);
+                var elseToken = Expect(TokenCategory.ELSE);
                 Expect(TokenCategory.CURLY_LEFT);
-                Stmt_List();
+                var stmtList = Stmt_List();
+                result.Add(stmtList);
+                result.AnchorToken = elseToken;
                 Expect(TokenCategory.CURLY_RIGHT);
             }
+            return result;
         }
 
-        public void Stmt_While(){
-            Expect(TokenCategory.WHILE);
+        public Node Stmt_While(){
+            var whileToken = Expect(TokenCategory.WHILE);
             Expect(TokenCategory.PARENTHESIS_LEFT);
-            Expr();
+            var expr1 = Expr();
             Expect(TokenCategory.PARENTHESIS_RIGHT);
             Expect(TokenCategory.CURLY_LEFT);
-            Stmt_List();
+            var stmtList = Stmt_List();
             Expect(TokenCategory.CURLY_RIGHT);
+            var result = new StatementWhile(){expr1, stmtList};
+			result.AnchorToken = whileToken;
+			return result;
         }
 
         public Node Stmt_Do_While(){
@@ -620,17 +634,17 @@ namespace Falak {
             switch (CurrentToken) {
 
             case TokenCategory.IDENTIFIER:
-               var token =  Expect(TokenCategory.IDENTIFIER);
+               var idToken =  Expect(TokenCategory.IDENTIFIER);
                     if(CurrentToken == TokenCategory.PARENTHESIS_LEFT){
                         var result = new FunCall();
-                        result.AnchorToken = token;
+                        result.AnchorToken = idToken;
                         Expect(TokenCategory.PARENTHESIS_LEFT);
                         result.Add(Expr_List());
                         Expect(TokenCategory.PARENTHESIS_RIGHT);
                         return result;
                     }else{
                         var result = new VarRef();
-                        result.AnchorToken = token;
+                        result.AnchorToken = idToken;
                         return result;
                     }
                 
