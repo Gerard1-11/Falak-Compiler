@@ -451,36 +451,35 @@ namespace Falak {
         public Node Expr_Or(){
             var result = Expr_And();
             while(firstOfBinaryExpr.Contains(CurrentToken)){
-                var idToken = Op_Or();
+                switch (CurrentToken) {
+
+                    case TokenCategory.OR:
+                        var newOr = new Or();
+                        var idToken = Expect(TokenCategory.OR);
+                        newOr.Add(result);
+                        newOr.Add(Expr_And());
+                        newOr.AnchorToken = idToken;
+                        result = newOr;
+                        break;
                 
-                var newOr = new Or();
-                newOr.Add(result);
-                newOr.Add(Expr_And());
-                newOr.AnchorToken = idToken;
-                result = newOr;
+                    case TokenCategory.XOR:
+                        var newXor = new Xor();
+                        var idToken2 = Expect(TokenCategory.XOR);
+                        newXor.Add(result);
+                        newXor.Add(Expr_And());
+                        newXor.AnchorToken = idToken2;
+                        result = newXor;
+                        break;
+
+                    default:
+                        throw new SyntaxError(firstOfBinaryExpr,
+                                      tokenStream.Current);
+                }
             }
             return result;
         }
 
-        public Node Op_Or(){
-            switch (CurrentToken) {
-
-            case TokenCategory.OR:
-                return new Or(){
-                   AnchorToken = Expect(TokenCategory.OR)
-
-                };
-
-            case TokenCategory.XOR:
-               return new Xor(){
-                   AnchorToken = Expect(TokenCategory.XOR)
-               };
-
-            default:
-                throw new SyntaxError(firstOfBinaryExpr,
-                                      tokenStream.Current);
-            }
-        }
+        //public Node Op_Or(){}
 
         public Node Expr_And(){
             var result = Expr_Comp();
@@ -533,7 +532,7 @@ namespace Falak {
                 expr2.Add(Expr_Add());
                 expr1 = expr2;
             }
-            return expr2;
+            return expr1;
         }
 
         public Node Op_Rel(){
@@ -556,7 +555,7 @@ namespace Falak {
 
             case TokenCategory.LESS_EQUAL:
                return new LessEqual(){
-                    Expect(TokenCategory.LESS_EQUAL)
+                    AnchorToken = Expect(TokenCategory.LESS_EQUAL)
                 };
 
             default:
@@ -571,7 +570,7 @@ namespace Falak {
                 var expr2 = Op_Add();
                 expr2.Add(expr1);
                 expr2.Add(Expr_Mul());
-                expr1 = expr1;
+                expr1 = expr2;
             }
             return expr1;
         }
@@ -690,7 +689,7 @@ namespace Falak {
                 
 
             case TokenCategory.SQUARE_BRACKET_LEFT:
-               Array();
+               return Array();
 
             case TokenCategory.TRUE:
                 return new True{

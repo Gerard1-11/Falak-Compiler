@@ -63,8 +63,8 @@ namespace Falak {
                 var input = File.ReadAllText(inputPath);
                 var parser = new Parser(
                     new Scanner(input).Scan().GetEnumerator());
-                parser.Program();
-                Console.WriteLine("Syntax OK.");
+                var program = parser.Program();
+                Console.WriteLine(program.ToStringTree());
 
             } catch (Exception e) {
 
