@@ -47,6 +47,10 @@ namespace Falak {
             return children.GetEnumerator();
         }
 
+        public int getCount(){
+            return children.Count;
+        }
+
         System.Collections.IEnumerator
                 System.Collections.IEnumerable.GetEnumerator() {
             throw new NotImplementedException();

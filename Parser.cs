@@ -202,7 +202,6 @@ namespace Falak {
            var result = new VariableDefinitionList();
            while(CurrentToken == TokenCategory.VAR){
                var result2 = Var_Def();
-               // Duda: 
                result.Add(result2);
            }
            return result;
@@ -584,7 +583,7 @@ namespace Falak {
                 };
 
             case TokenCategory.NEG:
-               return new Neg(){
+               return new Subs(){
                     AnchorToken = Expect(TokenCategory.NEG)
                 };
 
@@ -649,7 +648,7 @@ namespace Falak {
             switch (CurrentToken) {
 
             case TokenCategory.PLUS:
-                return new Plus(){
+                return new Positive(){
                     AnchorToken = Expect(TokenCategory.PLUS)
                 };
 

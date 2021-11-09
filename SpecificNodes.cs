@@ -90,6 +90,10 @@ namespace Falak {
 
     class Plus: Node {}
 
+    class Subs: Node {}
+
+    class Positive: Node {}
+
     class Neg: Node {}
 
     class Not: Node {}

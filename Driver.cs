@@ -15,13 +15,14 @@ namespace Falak {
 
     public class Driver {
 
-        const string VERSION = "0.3";
+        const string VERSION = "0.4";
 
         //-----------------------------------------------------------
         static readonly string[] ReleaseIncludes = {
             "Lexical analysis",
             "Syntatic analysis",
-            "AST Construction"
+            "AST Construction",
+            "Semantic analysis"
         };
 
         //-----------------------------------------------------------
@@ -64,11 +65,31 @@ namespace Falak {
                 var parser = new Parser(
                     new Scanner(input).Scan().GetEnumerator());
                 var program = parser.Program();
-                Console.WriteLine(program.ToStringTree());
+                Console.WriteLine("Syntax OK.");
+                //Console.WriteLine(program.ToStringTree());
+                
+                var semantic = new SemanticVisitor();
+                semantic.Visit((dynamic) program);
+                Console.WriteLine("Semantics OK.");
+                Console.WriteLine();
+                Console.WriteLine("Function Table");
+                Console.WriteLine("============");
+                foreach (var entry in semantic.GlobalFunctionTable) {
+                    Console.WriteLine(entry);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Global Variable Table");
+                Console.WriteLine("============");
+                foreach (var entry in semantic.GlobalVariableTable) {
+                    Console.WriteLine(entry);
+                }
 
             } catch (Exception e) {
 
-                if (e is FileNotFoundException || e is SyntaxError) {
+                if (e is FileNotFoundException 
+                 || e is SyntaxError 
+                 || e is SemanticError) {
                     Console.Error.WriteLine(e.Message);
                     Environment.Exit(1);
                 }
