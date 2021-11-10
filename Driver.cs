@@ -67,21 +67,22 @@ namespace Falak {
                 var program = parser.Program();
                 Console.WriteLine("Syntax OK.");
                 //Console.WriteLine(program.ToStringTree());
-                
-                var semantic = new SemanticVisitor();
-                semantic.Visit((dynamic) program);
+
+                var semantic2 = new SemanticVisitor();
+                semantic2.Visit((dynamic) program);
+
                 Console.WriteLine("Semantics OK.");
                 Console.WriteLine();
                 Console.WriteLine("Function Table");
                 Console.WriteLine("============");
-                foreach (var entry in semantic.GlobalFunctionTable) {
+                foreach (var entry in semantic2.GlobalFunctionTable) {
                     Console.WriteLine(entry);
                 }
 
                 Console.WriteLine();
                 Console.WriteLine("Global Variable Table");
                 Console.WriteLine("============");
-                foreach (var entry in semantic.GlobalVariableTable) {
+                foreach (var entry in semantic2.GlobalVariableTable) {
                     Console.WriteLine(entry);
                 }
 

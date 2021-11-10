@@ -38,54 +38,60 @@ namespace Falak {
 
        void DeclareAPI()
         {
-            GlobalFunctionTable["printi"].setArity(1);
-            GlobalFunctionTable["printc"].setArity(1);
-            GlobalFunctionTable["prints"].setArity(1);
-            GlobalFunctionTable["println"].setArity(0);
-            GlobalFunctionTable["readi"].setArity(0);
-            GlobalFunctionTable["reads"].setArity(0);
-            GlobalFunctionTable["new"].setArity(1);
-            GlobalFunctionTable["size"].setArity(1);
-            GlobalFunctionTable["add"].setArity(2);
-            GlobalFunctionTable["get"].setArity(2);
-            GlobalFunctionTable["set"].setArity(3);
+            GlobalFunctionTable["printi"] = new Type(true,1);
+            GlobalFunctionTable["printc"] = new Type(true,1);
+            GlobalFunctionTable["prints"] = new Type(true,1);
+            GlobalFunctionTable["println"]  = new Type(true,0);
+            GlobalFunctionTable["readi"]  = new Type(true,0);
+            GlobalFunctionTable["reads"] = new Type(true,0);
+            GlobalFunctionTable["new"] = new Type(true,1);
+            GlobalFunctionTable["size"] = new Type(true,1);
+            GlobalFunctionTable["add"] = new Type(true,2);
+            GlobalFunctionTable["get"] = new Type(true,2);
+            GlobalFunctionTable["set"] = new Type(true,3);
 
-            GlobalFunctionTable["printi"].setPrimitive(true);
-            GlobalFunctionTable["printc"].setPrimitive(true);
-            GlobalFunctionTable["prints"].setPrimitive(true);
-            GlobalFunctionTable["println"].setPrimitive(true);
-            GlobalFunctionTable["readi"].setPrimitive(true);
-            GlobalFunctionTable["reads"].setPrimitive(true);
-            GlobalFunctionTable["new"].setPrimitive(true);
-            GlobalFunctionTable["size"].setPrimitive(true);
-            GlobalFunctionTable["add"].setPrimitive(true);
-            GlobalFunctionTable["get"].setPrimitive(true);
-            GlobalFunctionTable["set"].setPrimitive(true);
         }
 
        //-----------------------------------------------------------
         public SemanticVisitor() {
-           pass = 1;
-           cycles = 0;
-           definitionBody = false;
+           this.pass = 1;
+           this.cycles = 0;
+           this.definitionBody = false;
 
-           GlobalVariableTable = new HashSet<string>();
-           GlobalFunctionTable = new SortedDictionary<string, Type>();
+           this.GlobalVariableTable = new HashSet<string>();
+           this.GlobalFunctionTable = new SortedDictionary<string, Type>();
 
            DeclareAPI();
         }
 
         //-----------------------------------------------------------
         public void Visit(Program node) {
+            // if (pass == 1){
+            //     VisitChildren(node);
+            // }
+
             VisitChildren(node);
             if(!GlobalFunctionTable.ContainsKey("main")){
-                throw new SemanticError("There is no main function");
-            }
-            var tableRow = GlobalFunctionTable["main"];
-            if(tableRow.getArity() > 0){
-                throw new SemanticError("Main function can not have any parameters");
-            }
+                    throw new SemanticError("There is no main function");
+                }
+                var tableRow = GlobalFunctionTable["main"];
+                if(tableRow.getArity() > 0){
+                    throw new SemanticError("Main function can not have any parameters");
+                }
+            pass = 2;
+            Console.WriteLine("Realizo Visit 1 Bien");
             VisitChildren(node);
+
+            // else{
+            //     if(!GlobalFunctionTable.ContainsKey("main")){
+            //         throw new SemanticError("There is no main function");
+            //     }
+            //     var tableRow = GlobalFunctionTable["main"];
+            //     if(tableRow.getArity() > 0){
+            //         throw new SemanticError("Main function can not have any parameters");
+            //     }
+            //     VisitChildren(node);
+            // }
         }
 
         //-----------------------------------------------------------
@@ -132,9 +138,10 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(FunctionDefinition node) {
             FunName = node.AnchorToken.Lexeme;
+            Console.WriteLine(FunName);
             if(pass == 1){
                 if(GlobalFunctionTable.ContainsKey(FunName)){
-                    throw new SemanticError(FunName + "function already exists", node.AnchorToken);
+                    throw new SemanticError(FunName + " function already exists", node.AnchorToken);
                 }
                 else{
                     if(node[0] is ExpressionList){
@@ -142,12 +149,10 @@ namespace Falak {
                         foreach (var id in node[0]){
                             arity++;
                         }
-                        GlobalFunctionTable[FunName].setArity(arity);
-                        GlobalFunctionTable[FunName].setPrimitive(false);
+                        GlobalFunctionTable[FunName] = new Type(false,arity);
                     }
                     else{
-                        GlobalFunctionTable[FunName].setArity(0);
-                        GlobalFunctionTable[FunName].setPrimitive(false);
+                        GlobalFunctionTable[FunName] = new Type(false,0);
                     }
 
                 }   
@@ -168,6 +173,7 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public void Visit(StatementList node) {
+            Console.WriteLine("Llegue " + node.AnchorToken);
             VisitChildren(node);
         }
 
@@ -186,6 +192,7 @@ namespace Falak {
                 throw new SemanticError("Undeclared variable: " + variableName);
 
             }
+            Console.WriteLine("Llegue :D" + variableName);
         }
 
          //-----------------------------------------------------------
@@ -219,11 +226,11 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public void Visit(StatementWhile node) {
-            cycles++;
+            cycles += 1;
             // Visit((dynamic) node[0]); //Expr
             // Visit((dynamic) node[1]); //StmtList :C
             VisitChildren(node);
-            cycles--;
+            cycles -= 1;
         }
 
         //-----------------------------------------------------------
@@ -356,6 +363,7 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(FunCall node) {
             var functionName = node.AnchorToken.Lexeme;
+            Console.WriteLine("Llegue " + functionName);
             if(!GlobalFunctionTable.ContainsKey(functionName)){
                 throw new SemanticError(functionName + " was not declared.");
             }
@@ -369,6 +377,7 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(VarRef node) {
             var varName = node.AnchorToken.Lexeme;
+            Console.WriteLine("Llegue " + varName + " " + FunName);
             var tableRow = GlobalFunctionTable[FunName];
             if(!(GlobalVariableTable.Contains(varName)) && !(tableRow.localTable.Contains(varName)) ){
                 throw new SemanticError(varName + " was not declared.", node.AnchorToken);    
