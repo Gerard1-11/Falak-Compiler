@@ -10,6 +10,8 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Falak {
 
@@ -76,14 +78,18 @@ namespace Falak {
                 Console.WriteLine("Function Table");
                 Console.WriteLine("============");
                 foreach (var entry in semantic2.GlobalFunctionTable) {
-                    Console.WriteLine(entry);
+                    Console.WriteLine(entry.Key);
                 }
 
                 Console.WriteLine();
                 Console.WriteLine("Global Variable Table");
                 Console.WriteLine("============");
-                foreach (var entry in semantic2.GlobalVariableTable) {
-                    Console.WriteLine(entry);
+                if(!semantic2.GlobalVariableTable.Any()){
+                    Console.WriteLine("There is no use of Global variables.");
+                }else{
+                    foreach (var entry in semantic2.GlobalVariableTable) {
+                        Console.WriteLine(entry);
+                    }
                 }
 
             } catch (Exception e) {

@@ -66,9 +66,6 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public void Visit(Program node) {
-            // if (pass == 1){
-            //     VisitChildren(node);
-            // }
 
             VisitChildren(node);
             if(!GlobalFunctionTable.ContainsKey("main")){
@@ -79,19 +76,14 @@ namespace Falak {
                     throw new SemanticError("Main function can not have any parameters");
                 }
             pass = 2;
-            Console.WriteLine("Realizo Visit 1 Bien");
+            
+            // //Debug
+            // Console.WriteLine("Realizo Visit 1 Bien");
+            // foreach (KeyValuePair<string, Type> kvp in GlobalFunctionTable){
+            //     Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.getArity()));
+            // }   
+            
             VisitChildren(node);
-
-            // else{
-            //     if(!GlobalFunctionTable.ContainsKey("main")){
-            //         throw new SemanticError("There is no main function");
-            //     }
-            //     var tableRow = GlobalFunctionTable["main"];
-            //     if(tableRow.getArity() > 0){
-            //         throw new SemanticError("Main function can not have any parameters");
-            //     }
-            //     VisitChildren(node);
-            // }
         }
 
         //-----------------------------------------------------------
@@ -138,23 +130,21 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(FunctionDefinition node) {
             FunName = node.AnchorToken.Lexeme;
-            Console.WriteLine(FunName);
+            //Console.WriteLine(FunName);
             if(pass == 1){
                 if(GlobalFunctionTable.ContainsKey(FunName)){
                     throw new SemanticError(FunName + " function already exists", node.AnchorToken);
                 }
                 else{
-                    if(node[0] is ExpressionList){
-                        int arity = 0;
-                        foreach (var id in node[0]){
+                    int arity = 0;
+                    foreach (var id in node[0]){
+                        foreach (var num in id){
+                            //Console.WriteLine(id);
                             arity++;
                         }
-                        GlobalFunctionTable[FunName] = new Type(false,arity);
                     }
-                    else{
-                        GlobalFunctionTable[FunName] = new Type(false,0);
-                    }
-
+                    //Console.WriteLine("Done");
+                    GlobalFunctionTable[FunName] = new Type(false,arity);
                 }   
             }else{
                  VisitChildren(node);
@@ -173,7 +163,7 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public void Visit(StatementList node) {
-            Console.WriteLine("Llegue " + node.AnchorToken);
+            //Console.WriteLine("Llegue " + node.AnchorToken);
             VisitChildren(node);
         }
 
@@ -192,7 +182,7 @@ namespace Falak {
                 throw new SemanticError("Undeclared variable: " + variableName);
 
             }
-            Console.WriteLine("Llegue :D" + variableName);
+            //Console.WriteLine("Llegue :D" + variableName);
         }
 
          //-----------------------------------------------------------
@@ -203,6 +193,12 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(StatementDecrease node) {
             //solo consume
+        }
+
+        //-----------------------------------------------------------
+        public void Visit(StatementFuncCall node) {
+            //solo consume
+            VisitChildren(node);
         }
 
         //-----------------------------------------------------------
@@ -363,7 +359,8 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(FunCall node) {
             var functionName = node.AnchorToken.Lexeme;
-            Console.WriteLine("Llegue " + functionName);
+            //FunName = functionName;
+            //Console.WriteLine("Llegue " + functionName);
             if(!GlobalFunctionTable.ContainsKey(functionName)){
                 throw new SemanticError(functionName + " was not declared.");
             }
@@ -377,7 +374,7 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(VarRef node) {
             var varName = node.AnchorToken.Lexeme;
-            Console.WriteLine("Llegue " + varName + " " + FunName);
+            //Console.WriteLine("Llegue " + varName + " " + FunName);
             var tableRow = GlobalFunctionTable[FunName];
             if(!(GlobalVariableTable.Contains(varName)) && !(tableRow.localTable.Contains(varName)) ){
                 throw new SemanticError(varName + " was not declared.", node.AnchorToken);    
