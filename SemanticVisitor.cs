@@ -69,11 +69,11 @@ namespace Falak {
 
             VisitChildren(node);
             if(!GlobalFunctionTable.ContainsKey("main")){
-                    throw new SemanticError("There is no main function");
+                    throw new SemanticError("There is no main function", node.AnchorToken);
                 }
                 var tableRow = GlobalFunctionTable["main"];
                 if(tableRow.getArity() > 0){
-                    throw new SemanticError("Main function can not have any parameters");
+                    throw new SemanticError("Main function can not have any parameters", node.AnchorToken);
                 }
             pass = 2;
             
@@ -179,7 +179,7 @@ namespace Falak {
                 VisitChildren(node);
             }
             else{
-                throw new SemanticError("Undeclared variable: " + variableName);
+                throw new SemanticError("Undeclared variable: " + variableName, node.AnchorToken);
 
             }
             //Console.WriteLine("Llegue :D" + variableName);
@@ -193,12 +193,6 @@ namespace Falak {
         //-----------------------------------------------------------
         public void Visit(StatementDecrease node) {
             //solo consume
-        }
-
-        //-----------------------------------------------------------
-        public void Visit(StatementFuncCall node) {
-            //solo consume
-            VisitChildren(node);
         }
 
         //-----------------------------------------------------------
@@ -362,11 +356,17 @@ namespace Falak {
             //FunName = functionName;
             //Console.WriteLine("Llegue " + functionName);
             if(!GlobalFunctionTable.ContainsKey(functionName)){
-                throw new SemanticError(functionName + " was not declared.");
+                throw new SemanticError(functionName + " was not declared.", node.AnchorToken);
             }
+
+            // Debug
+            // Console.WriteLine(functionName);
+            // Console.WriteLine(node[0]);
+            // Console.WriteLine(node[0].getCount());
+            // Console.WriteLine(GlobalFunctionTable[functionName].getArity());
+            
             if(node[0].getCount()!= GlobalFunctionTable[functionName].getArity()){
                 throw new SemanticError(functionName + " takes a different number of arguments.", node.AnchorToken);
-
             }
             VisitChildren(node);
         }

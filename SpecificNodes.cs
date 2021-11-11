@@ -44,8 +44,6 @@ namespace Falak {
 
     class StatementDecrease: Node {}
 
-    class StatementFuncCall: Node {}
-
     class StatementIf: Node {}
 
     class ElseIfList: Node {}

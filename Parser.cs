@@ -314,16 +314,9 @@ namespace Falak {
 
         public Node Fun_Call(Token idToken){
             Expect(TokenCategory.PARENTHESIS_LEFT);
-            var exprList = new StatementFuncCall();
+            var exprList = new FunCall();
             exprList.AnchorToken = idToken;
-            if(firstOfSuperExpression.Contains(CurrentToken)){
-                exprList.Add(Expr());
-                while(CurrentToken == TokenCategory.COMA){
-                    Expect(TokenCategory.COMA);
-                    exprList.Add(Expr());
-                }
-            }
-            //Expr_List();
+            exprList.Add(Expr_List());
             Expect(TokenCategory.PARENTHESIS_RIGHT);
             Expect(TokenCategory.SEMICOLON);
             return exprList;
