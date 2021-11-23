@@ -47,8 +47,59 @@ def make_import_object(store):
         check_bounds(HANDLES, s, INVALID_HANDLE_ERROR + str(s),
             currentframe().f_code.co_name)
         print(''.join([chr(c) for c in HANDLES[s]]), end='')
-        return 0    
+        return 0
+
+    def println() -> int:
+        print()
+        return 0
+
+    def readi() -> int:
+        data = ''
+        while not VALID_INT_REGEX.match(data):
+            data = input()
+        return int(data)
+
+    def reads() -> int:
+        data = input()
+        HANDLES.append([ord(c) for c in data])
+        return len(HANDLES) - 1
     
+    def new(n: int) -> int:
+        if n < 0:
+            print('Runtime error in function new. '
+                f"Can't create a negative size array: {n}",
+                file=sys.stderr)
+            sys.exit(1)
+        HANDLES.append([0] * n)
+        return len(HANDLES) - 1
+
+    def size(h: int) -> int:
+        check_bounds(HANDLES, h, INVALID_HANDLE_ERROR + str(h),
+            currentframe().f_code.co_name)
+        return len(HANDLES[h])
+
+    
+    def add(h: int, x: int) -> int:
+        check_bounds(HANDLES, h, INVALID_HANDLE_ERROR + str(h),
+            currentframe().f_code.co_name)
+        HANDLES[h].append(x)
+        return 0
+    
+    def get(h: int, i: int) -> int:
+        check_bounds(HANDLES, h, INVALID_HANDLE_ERROR + str(h),
+            currentframe().f_code.co_name)
+        check_bounds(HANDLES[h], i, INVALID_BOUNDS_ERROR + str(i),
+            currentframe().f_code.co_name)
+        return HANDLES[h][i]
+
+    def set(h: int, i: int, x: int) -> int:
+        check_bounds(HANDLES, h, INVALID_HANDLE_ERROR + str(h),
+            currentframe().f_code.co_name)
+        check_bounds(HANDLES[h], i, INVALID_BOUNDS_ERROR + str(i),
+            currentframe().f_code.co_name)
+        HANDLES[h][i] = x
+        return 0    
+
     #----------------------------------------------------------------
 
     import_object = ImportObject()
