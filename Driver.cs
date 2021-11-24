@@ -17,14 +17,15 @@ namespace Falak {
 
     public class Driver {
 
-        const string VERSION = "0.4";
+        const string VERSION = "0.5";
 
         //-----------------------------------------------------------
         static readonly string[] ReleaseIncludes = {
             "Lexical analysis",
             "Syntatic analysis",
             "AST Construction",
-            "Semantic analysis"
+            "Semantic analysis",
+            "WAT Code Generation"
         };
 
         //-----------------------------------------------------------
@@ -63,6 +64,7 @@ namespace Falak {
 
             try {
                 var inputPath = args[0];
+                var outputPath = Path.ChangeExtension(inputPath, ".wat");
                 var input = File.ReadAllText(inputPath);
                 var parser = new Parser(
                     new Scanner(input).Scan().GetEnumerator());
@@ -91,6 +93,14 @@ namespace Falak {
                         Console.WriteLine(entry);
                     }
                 }
+
+                var codeGenerator = new WatVisitor(semantic2.LocalSymbolTable);
+                File.WriteAllText(
+                    outputPath,
+                    codeGenerator.Visit((dynamic) program));
+                Console.WriteLine(
+                    "Created Wat (WebAssembly text format) file "
+                    + $"'{outputPath}'.");
 
             } catch (Exception e) {
 

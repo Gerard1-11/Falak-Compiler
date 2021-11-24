@@ -31,6 +31,14 @@ namespace Falak {
 
         IList<Node> children = new List<Node>();
 
+        public int childs(){
+          int index = 0;
+          foreach(var child in children){
+            index += 1;
+          }
+          return index;
+        }
+
         public Node this[int index] {
             get {
                 return children[index];

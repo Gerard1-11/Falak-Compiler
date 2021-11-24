@@ -28,8 +28,9 @@ namespace Falak {
 
     class SemanticVisitor {
 
-       public HashSet<string> GlobalVariableTable;
+       public HashSet<string> GlobalVariableTable, ScopeSymbolsTable;
        public IDictionary<string, Type> GlobalFunctionTable;
+       public IDictionary<string, HashSet<string>> LocalSymbolTable = new SortedDictionary<string, HashSet<string>>();
 
        public int cycles, pass;
        public string FunName;
@@ -109,13 +110,16 @@ namespace Falak {
                 if(!GlobalVariableTable.Contains(variableName)){
                     if(tableRow.localTable.Contains(variableName)){
                         throw new SemanticError("Variable" + variableName +  " is already declared inside" + FunName, node.AnchorToken);
-                    }else{
+                    }
+                    else{
                         tableRow.localTable.Add(variableName);
+                        ScopeSymbolsTable.Add(variableName);
                     }
                     
                 }else{
                     if(definitionBody){
                         tableRow.localTable.Add(variableName);
+                        ScopeSymbolsTable.Add(variableName);
                     }
                 }
             }
@@ -147,7 +151,11 @@ namespace Falak {
                     GlobalFunctionTable[FunName] = new Type(false,arity);
                 }   
             }else{
+
+                 ScopeSymbolsTable = new HashSet<string>();
                  VisitChildren(node);
+                 LocalSymbolTable[FunName] = ScopeSymbolsTable;
+                 ScopeSymbolsTable = new HashSet<string>();
             }
         }
 
