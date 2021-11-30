@@ -290,19 +290,25 @@ namespace Falak {
 
         public Node Stmt_Incr(){
             var incToken = Expect(TokenCategory.INC);
-            Expect(TokenCategory.IDENTIFIER);
+            var newNodeToken = Expect(TokenCategory.IDENTIFIER);
             Expect(TokenCategory.SEMICOLON);
             var result = new StatementIncrease();
+            var newNode = new VarRef();
             result.AnchorToken = incToken;
+            newNode.AnchorToken = newNodeToken;
+            result.Add(newNode);
             return result;
         }
 
         public Node Stmt_Decr(){
             var decToken = Expect(TokenCategory.DEC);
-            Expect(TokenCategory.IDENTIFIER);
+            var newNodeToken = Expect(TokenCategory.IDENTIFIER);
             Expect(TokenCategory.SEMICOLON);
             var result = new StatementDecrease();
+            var newNode = new VarRef();
             result.AnchorToken = decToken;
+            newNode.AnchorToken = newNodeToken;
+            result.Add(newNode);
             return result;
         }
 
@@ -323,37 +329,55 @@ namespace Falak {
         }
 
         public Node Stmt_If(){
+            var result = new StatementIf();
             var ifToken = Expect(TokenCategory.IF);
+            result.AnchorToken = ifToken;
             Expect(TokenCategory.PARENTHESIS_LEFT);
             var expr = Expr();
+            result.Add(expr);
             Expect(TokenCategory.PARENTHESIS_RIGHT);
             Expect(TokenCategory.CURLY_LEFT);
             var stmtList = Stmt_List();
+            result.Add(stmtList);
             Expect(TokenCategory.CURLY_RIGHT);
-            var elseIfList = Else_If_List();
-            var else1 = Else();
-            var result = new StatementIf(){expr, stmtList, elseIfList, else1};
-            result.AnchorToken = ifToken;
+            if (CurrentToken == TokenCategory.ELSEIF)
+            {
+                var elseIfList = Else_If_List();
+                result.Add(elseIfList);
+            }
+            else if (CurrentToken == TokenCategory.ELSE)
+            {
+                var else1 = Else();
+                result.Add(else1);
+            }
             return result;
         }
 
         public Node Else_If_List(){
             var result = new ElseIfList();
-            while(CurrentToken == TokenCategory.ELSEIF){
-                    var elifToken = Expect(TokenCategory.ELSEIF);
-                    Expect(TokenCategory.PARENTHESIS_LEFT);
-                    while(firstOfPrimaryExpr.Contains(CurrentToken)){
-                        var expr = Expr();
-                        result.Add(expr);
-                        result.AnchorToken = elifToken;
-                    }
-                    Expect(TokenCategory.PARENTHESIS_RIGHT);
-                    Expect(TokenCategory.CURLY_LEFT);
-                    var stmtList = Stmt_List();
-                    result.Add(stmtList);
-                    Expect(TokenCategory.CURLY_RIGHT);
-               }
-               return result;
+            var elseifToken = Expect(TokenCategory.ELSEIF);
+            result.AnchorToken = elseifToken;
+            Expect(TokenCategory.PARENTHESIS_LEFT);
+            var expr = Expr();
+            result.Add(expr);
+                
+            Expect(TokenCategory.PARENTHESIS_RIGHT);
+            Expect(TokenCategory.CURLY_LEFT);
+            var stmtList = Stmt_List();
+            result.Add(stmtList);
+            Expect(TokenCategory.CURLY_RIGHT);
+            if (CurrentToken == TokenCategory.ELSEIF)
+            {
+                var elseIfList = Else_If_List();
+                result.Add(elseIfList);
+            }
+            else if (CurrentToken == TokenCategory.ELSE)
+            {
+                var else1 = Else();
+                result.Add(else1);
+            }   
+
+            return result;
         }
 
         public Node Else(){
@@ -362,8 +386,8 @@ namespace Falak {
                 var elseToken = Expect(TokenCategory.ELSE);
                 Expect(TokenCategory.CURLY_LEFT);
                 var stmtList = Stmt_List();
-                result.Add(stmtList);
                 result.AnchorToken = elseToken;
+                result.Add(stmtList);  
                 Expect(TokenCategory.CURLY_RIGHT);
             }
             return result;

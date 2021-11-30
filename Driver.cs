@@ -70,7 +70,7 @@ namespace Falak {
                     new Scanner(input).Scan().GetEnumerator());
                 var program = parser.Program();
                 Console.WriteLine("Syntax OK.");
-                //Console.WriteLine(program.ToStringTree());
+                Console.WriteLine(program.ToStringTree());
 
                 var semantic2 = new SemanticVisitor();
                 semantic2.Visit((dynamic) program);
@@ -94,7 +94,7 @@ namespace Falak {
                     }
                 }
 
-                var codeGenerator = new WatVisitor(semantic2.LocalSymbolTable);
+                var codeGenerator = new WatVisitor(semantic2.LocalSymbolTable, semantic2.GlobalVariableTable, semantic2.GlobalFunctionTable);
                 File.WriteAllText(
                     outputPath,
                     codeGenerator.Visit((dynamic) program));

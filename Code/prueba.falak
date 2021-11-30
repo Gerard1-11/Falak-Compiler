@@ -1,0 +1,16 @@
+<# File: 001_hello.falak
+   The classical "hello, world" program.
+   (C) 2021 Ariel Ortiz, ITESM CEM.
+#>
+
+
+main() {
+    var x;
+    if (1 < 2) {
+         x = 3;
+    } elseif (4 < 5) {
+         x = 6;
+    } else {
+        x = 7;
+    }
+}

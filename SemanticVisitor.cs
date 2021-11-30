@@ -119,7 +119,7 @@ namespace Falak {
                 }else{
                     if(definitionBody){
                         tableRow.localTable.Add(variableName);
-                        ScopeSymbolsTable.Add(variableName);
+                        //ScopeSymbolsTable.Add(variableName);
                     }
                 }
             }

@@ -28,11 +28,14 @@ using System.Linq;
 namespace Falak {
 
     class WatVisitor {
-       public IDictionary<string, HashSet<string>> SymbolTable;
-       public int cycles, cantTabs;
-       public int ret = 0;
-       public string FunName;
-       string block, passblock;
+        public HashSet<string> GlobalVariableTable;
+        public IDictionary<string, Type> GlobalFunctionTable;
+        public IDictionary<string, HashSet<string>> SymbolTable;
+        public int cycles, cantTabs;
+        public int ret = 0;
+        public string FunName;
+        string block, passblock;
+        public bool VarDefinitionBody, ArrayBody;
 
     //    void DeclareAPI()
     //     {
@@ -80,8 +83,12 @@ namespace Falak {
         }
 
        //-----------------------------------------------------------
-        public WatVisitor(IDictionary<string, HashSet<string>> SymbolTable) {
-           this.SymbolTable = SymbolTable;
+        public WatVisitor(IDictionary<string, HashSet<string>> SymbolTable, HashSet<string> GlobalVariableTable, IDictionary<string, Type> GlobalFunctionTable) {
+            this.GlobalVariableTable = GlobalVariableTable;
+            this.GlobalFunctionTable = GlobalFunctionTable;
+            this.SymbolTable = SymbolTable;
+            this.VarDefinitionBody = false;
+            this.ArrayBody = false;
         }
 
         //-----------------------------------------------------------
@@ -101,21 +108,12 @@ namespace Falak {
                 + " (import \"falak\" \"add\" (func $add (param i32) (param i32) (result i32)))\n"
                 + " (import \"falak\" \"get\" (func $get (param i32) (param i32) (result i32)))\n"
                 + " (import \"falak\" \"set\" (func $set (param i32) (param i32) (param i32)))\n"
-                + globalDefs((dynamic) node[0]) // VarList
-                + Visit((dynamic) node[1]) // FunList
+                + VisitChildren((dynamic) node) // FunList
                 + ")\n";
             
         }
 
-        //-----------------------------------------------------------
-
-        public string globalDefs(VarList node){
-          string regresa = "";
-          foreach(var n in node){
-            regresa += tabs() + $"(global ${n.AnchorToken.Lexeme} (mut i32) (i32.const 0))\n";
-          }
-          return regresa;
-        }        
+        //-----------------------------------------------------------       
 
         public string Visit(DefinitionList node) {
             return VisitChildren((dynamic) node);
@@ -124,49 +122,65 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public string Visit(VarDef node) {
-            return tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
+            var variableName = node.AnchorToken.Lexeme;
+            if(GlobalVariableTable.Contains(variableName)){
+                return tabs() + $"(global ${variableName} (mut i32) (i32.const 0))\n";
+            }else{
+                if (!VarDefinitionBody){
+                    return tabs() + $"(param ${node.AnchorToken.Lexeme} i32)\n";
+                }else{
+                    return tabs() + $"(local ${node.AnchorToken.Lexeme} i32)\n";
+                } 
+            }
+                
         }
 
         //-----------------------------------------------------------
-       public string Visit(VarList node) {
+        public string Visit(VarList node) {
             return VisitChildren((dynamic) node); 
         }
 
         //-----------------------------------------------------------
         public string Visit(FunctionDefinition node) {
             FunName = node.AnchorToken.Lexeme;
+            Console.WriteLine(FunName);
             ret = 1;
             string regresar = "";
             if(FunName == "main"){
                 regresar = "\n" + tabs(1) + $"(func\n"
                 + tabs() + "(export \"main\")\n"
-                + Params((dynamic) node[0]);
+                + VisitChildren((dynamic) node)
+                + tabs(-1);
             }else{
                 regresar = "\n" + tabs(1) + $"(func ${node.AnchorToken.Lexeme}\n"
-                + Params((dynamic) node[0]);
+                + VisitChildren((dynamic) node)
+                + tabs(-1);
             }
-            string red = tabs() + "(result i32)\n";
-            string regresar2 = tabs() + "(local $_temp i32)\n"
-            + VisitChildren((dynamic) node,1);
+            return regresar;
+            //string red = tabs() + "(result i32)\n";
+            //string regresar2 = tabs() + "(local $_temp i32)\n"
+            //+ VisitChildren((dynamic) node, 1);
 
-            if(ret == 0){
-                return regresar + red + regresar2 + tabs() + "i32.const 0\n"
-			    + tabs(-1) + "return\n" + tabs() + ")\n";
-            }
-            return regresar + red + regresar2  + tabs() + "i32.const 0\n"
-                + tabs(-1) + "return\n" + tabs() + ")\n";
+            //    return regresar + red + regresar2 + tabs() + "i32.const 0\n"
+			//    + tabs(-1) + "return\n" + tabs() + ")\n";
+            //}
+            //return regresar + red + regresar2  + tabs() + "i32.const 0\n"
+            //    + tabs(-1) + "return\n" + tabs() + ")\n";
         }
 
         //-----------------------------------------------------------
-        public void Visit(VariableDefinitionList node) {
-            VisitChildren(node);
+        public string Visit(VariableDefinitionList node) {
+            VarDefinitionBody = true;
+            var regreso = tabs() + "(local $_temp i32)\n" + VisitChildren((dynamic) node);    
+            VarDefinitionBody = false;
+            return regreso;
         }
 
         //-----------------------------------------------------------
-        // public void Visit(ParameterList node) {
-        //     VisitChildren(node);
-        // }
-        public string Params(ExpressionList node){
+        public string Visit(ParameterList node) {
+            return VisitChildren((dynamic) node) + tabs() + "(result i32)\n"; 
+        }
+        public string Params(ParameterList node){
           string regresa = "\n";
           foreach(var nodeC in node){
             regresa += tabs() + $"(param ${nodeC.AnchorToken.Lexeme} i32)\n";
@@ -203,7 +217,7 @@ namespace Falak {
 
          //-----------------------------------------------------------
         public string Visit(StatementIncrease node) {
-            return Visit((dynamic) node[0])
+            return VisitChildren((dynamic) node)
                 + tabs() +"i32.const 1\n"
                 + tabs() +"i32.add\n"
                 + tabs() +$"{getVariableCategory(node[0])}.set ${node[0].AnchorToken.Lexeme}\n";
@@ -211,7 +225,7 @@ namespace Falak {
 
         //-----------------------------------------------------------
        public string Visit(StatementDecrease node) {
-            return Visit((dynamic) node[0])
+            return VisitChildren((dynamic) node)
                 + tabs() +"i32.const 1\n"
                 + tabs() + "i32.sub\n"
                 + tabs() +  $"{getVariableCategory(node[0])}.set ${node[0].AnchorToken.Lexeme}\n";
@@ -227,17 +241,26 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public string Visit(ElseIfList node) {
-            return  tabs(-99) + "else\n"
+            if (node.childs() == 0){
+                return "";
+            }else{
+                return  tabs(-99) + "else\n"
                 + Visit((dynamic) node[0])
                 + tabs(1) + "if\n"
                 + VisitChildren((dynamic) node,1)
                 + tabs(-98) + "end\n";
+            }
+            
         }
 
         //-----------------------------------------------------------
         public string Visit(Else node) { 
-            return  tabs(-99) + "else\n"
-              + Visit((dynamic) node[0]);
+            if (node.childs() == 0){
+                return "";
+            }else{
+                return  tabs(-99) + "else\n"
+                + Visit((dynamic) node[0]);
+            }
         }
 
         //-----------------------------------------------------------
@@ -302,19 +325,35 @@ namespace Falak {
             + tabs() + "local.get $_temp\n"
             + arr
             + tabs() + "return\n";
-          }
-          return Visit((dynamic) node[0])
-          + tabs() + "return\n";
+            }
+            return Visit((dynamic) node[0])
+            + tabs() + "return\n";
         }
 
         //-----------------------------------------------------------
-        public void Visit(Empty node) {
-            //Solo se consume
+        public string Visit(Empty node) {
+            return "";
         }
 
         //-----------------------------------------------------------
         public string Visit(ExpressionList node) {
-            return VisitChildren((dynamic) node);
+            if(ArrayBody == true){
+                var regresar = "";
+                if (node.childs() > 0){
+                    for(int i = 0; i < node.childs(); i++){
+                        regresar += tabs() + "local.get $_temp\n";
+                    }
+                    foreach (var n in node){
+                        regresar += Visit((dynamic) n)
+                            + tabs() + "call $add\n"
+                            + tabs() + "drop\n";
+                    }
+                }
+                return regresar;
+            }else {
+                return VisitChildren((dynamic) node);
+            }
+            
         }
 
          //-----------------------------------------------------------
@@ -330,8 +369,8 @@ namespace Falak {
         }
 
          //-----------------------------------------------------------
-        public void Visit(Xor node) {
-            VisitChildren(node);
+        public string Visit(Xor node) {
+            return "XOR Pendiente";
         }
 
          //-----------------------------------------------------------
@@ -357,7 +396,7 @@ namespace Falak {
         public string Visit(NotEqualTo node) {
             return Visit((dynamic) node[0])
                 + Visit((dynamic) node[1])
-                + tabs() + "i32.eq\n"
+                //+ tabs() + "i32.eq\n"
                 + tabs() + "i32.eqz\n";
         }
 
@@ -440,7 +479,7 @@ namespace Falak {
         public string Visit(Not node) {
             return Visit((dynamic) node[0])
                 + tabs() + "i32.const 0\n"
-                + tabs() + "i32.eq\n";
+                + tabs() + "i32.eqz\n";
         }
 
         //-----------------------------------------------------------
@@ -521,11 +560,13 @@ namespace Falak {
         public string Visit(Lit_String node) {
             string regresar = tabs() + "i32.const 0\n"
             + tabs() + "call $new\n"
-            + tabs() + "local.set $_temp\n"
-            + tabs() + "local.get $_temp\n";
+            + tabs() + "local.set $_temp\n";
             char[] str = node.AnchorToken.Lexeme.ToCharArray();
             for(int i = 1; i < str.Length - 1; i++){
                 regresar += tabs() + "local.get $_temp\n";
+            }
+            for(int i = 1; i < str.Length - 1; i++){
+                
                 if(str[i] == '\\'){
                 i++;
                 int c = 0;
@@ -570,8 +611,17 @@ namespace Falak {
 
 
          //-----------------------------------------------------------
-        public void Visit(LitArray node) {
-            //VisitChildren(node);
+        public string Visit(LitArray node) {
+            string regresar = tabs() + "i32.const 0\n"
+            + tabs() + "call $new\n"
+            + tabs() + "local.set $_temp\n"
+            + tabs() + "local.get $_temp\n";
+
+            ArrayBody = true;
+            string regresar2 = VisitChildren((dynamic) node);
+            ArrayBody = false;
+
+            return regresar + regresar2;
         }
         
 
