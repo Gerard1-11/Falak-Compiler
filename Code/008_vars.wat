@@ -139,7 +139,7 @@
 		global.get $c
 		call $printi
 		call $println
-			(global $b (mut i32) (i32.const 0))
+		)	(global $b (mut i32) (i32.const 0))
 	(global $c (mut i32) (i32.const 0))
 
 	(func
@@ -310,4 +310,4 @@
 		local.get $x
 		call $printi
 		call $println
-		)
+		))

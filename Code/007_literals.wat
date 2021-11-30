@@ -112,7 +112,7 @@
 			call $prints
 			call $println
 		end
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -1604,4 +1604,4 @@
 		call $println
 		local.get $a
 		call $prints
-		)
+		))

@@ -21,7 +21,7 @@
 		local.get $x
 		i32.mul
 		return
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -531,4 +531,4 @@
 			drop
 			call $prints
 		end
-		)
+		))

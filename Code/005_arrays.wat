@@ -71,7 +71,7 @@
 		end
 		i32.const 93
 		call $printc
-		
+		)
 	(func $sum_array
 		(param $a i32)
 		(result i32)
@@ -112,7 +112,7 @@
 		end
 		local.get $sum
 		return
-		
+		)
 	(func $max_array
 		(param $a i32)
 		(result i32)
@@ -161,7 +161,7 @@
 		end
 		local.get $max
 		return
-		
+		)
 	(func $sort_array
 		(param $a i32)
 		(result i32)
@@ -259,7 +259,7 @@
 				br $00008
 			end
 		end
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -644,4 +644,4 @@
 		local.get $array
 		call $print_array
 		call $println
-		)
+		))

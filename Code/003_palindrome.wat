@@ -47,19 +47,21 @@
 					i32.const 0
 					return
 				end
+				local.get $start
 				i32.const 1
 				i32.add
-				global.set $inc
+				local.set $start
+				local.get $finish
 				i32.const 1
 				i32.sub
-				global.set $dec
+				local.set $finish
 
 				br $00002
 			end
 		end
 		i32.const 1
 		return
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -221,7 +223,7 @@
 				local.get $str
 				call $is_palindrome
 				i32.const 0
-				i32.eq
+				i32.eqz
 				if
 					i32.const 0
 					call $new
@@ -423,4 +425,4 @@
 				br $00004
 			end
 		end
-		)
+		))

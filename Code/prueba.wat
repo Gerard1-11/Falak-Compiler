@@ -17,23 +17,9 @@
 		(export "main")
 		(result i32)
 		(local $_temp i32)
-		(local $x i32)
-		i32.const 1
-		i32.const 2
-		i32.lt_s
-		if
-			i32.const 3
-			local.set $x
-		else
-			i32.const 4
-			i32.const 5
-			i32.lt_s
-			if
-				i32.const 6
-				local.set $x
-			else
-				i32.const 7
-				local.set $x
-			end
-		end
-		)
+		(local $a i32)
+		i32.const 5
+		local.set $a
+		local.get $a
+		call $printi
+		))

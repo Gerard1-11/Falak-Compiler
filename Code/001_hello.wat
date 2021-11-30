@@ -76,4 +76,4 @@
 		call $prints
 		i32.const 42
 		return
-		)
+		))

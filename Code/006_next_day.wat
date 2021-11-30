@@ -49,7 +49,7 @@
 			i32.const 0
 			return
 		end
-		
+		)
 	(func $number_of_days_in_month
 		(param $y i32)
 		(param $m i32)
@@ -103,14 +103,14 @@
 			if
 				i32.const 30
 				local.set $result
+			else
+				i32.const 31
+				local.set $result
 			end
-		else
-			i32.const 31
-			local.set $result
 		end
 		local.get $result
 		return
-		
+		)
 	(func $next_day
 		(param $y i32)
 		(param $m i32)
@@ -188,7 +188,7 @@
 			drop
 			return
 		end
-		
+		)
 	(func $print_next_day
 		(param $y i32)
 		(param $m i32)
@@ -308,7 +308,7 @@
 		call $get
 		call $printi
 		call $println
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -329,4 +329,4 @@
 		i32.const 12
 		i32.const 31
 		call $print_next_day
-		)
+		))

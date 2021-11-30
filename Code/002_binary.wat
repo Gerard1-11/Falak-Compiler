@@ -53,17 +53,19 @@
 				local.get $finish
 				local.get $temp
 				call $set
+				local.get $start
 				i32.const 1
 				i32.add
-				global.set $inc
+				local.set $start
+				local.get $finish
 				i32.const 1
 				i32.sub
-				global.set $dec
+				local.set $finish
 
 				br $00002
 			end
 		end
-		
+		)
 	(func $binary
 		(param $num i32)
 		(result i32)
@@ -78,6 +80,8 @@
 			call $new
 			local.set $_temp
 			local.get $_temp
+			local.get $_temp
+			local.get $_temp
 			i32.const 48
 			call $add
 			drop
@@ -86,6 +90,8 @@
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
+		local.get $_temp
 		local.set $result
 		block $00003
 			loop $00004
@@ -118,7 +124,7 @@
 		call $reverse
 		local.get $result
 		return
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -130,6 +136,8 @@
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -200,6 +208,8 @@
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -380,6 +390,8 @@
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
+				local.get $_temp
+				local.get $_temp
 				i32.const 67
 				call $add
 				drop
@@ -479,4 +491,4 @@
 				br $00006
 			end
 		end
-		)
+		))

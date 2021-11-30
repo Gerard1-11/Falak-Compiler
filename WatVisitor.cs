@@ -150,11 +150,13 @@ namespace Falak {
                 regresar = "\n" + tabs(1) + $"(func\n"
                 + tabs() + "(export \"main\")\n"
                 + VisitChildren((dynamic) node)
-                + tabs(-1);
+                + tabs(-1)
+                + ")";
             }else{
                 regresar = "\n" + tabs(1) + $"(func ${node.AnchorToken.Lexeme}\n"
                 + VisitChildren((dynamic) node)
-                + tabs(-1);
+                + tabs(-1)
+                + ")";
             }
             return regresar;
             //string red = tabs() + "(result i32)\n";
@@ -204,12 +206,12 @@ namespace Falak {
                     + tabs() + "call $add\n"
                     + tabs() + "drop\n";
                 }
-            return tabs() + "i32.const 0\n"
-            + tabs() + "call $new\n"
-            + tabs() + "local.set $_temp\n"
-            + tabs() + "local.get $_temp\n"
-            + arr
-            + tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
+                return tabs() + "i32.const 0\n"
+                + tabs() + "call $new\n"
+                + tabs() + "local.set $_temp\n"
+                + tabs() + "local.get $_temp\n"
+                + arr
+                + tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
             }
             return Visit((dynamic) node[0])
                 + tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
@@ -340,7 +342,7 @@ namespace Falak {
             if(ArrayBody == true){
                 var regresar = "";
                 if (node.childs() > 0){
-                    for(int i = 0; i < node.childs(); i++){
+                    for(int i = 0; i <= node.childs(); i++){
                         regresar += tabs() + "local.get $_temp\n";
                     }
                     foreach (var n in node){
@@ -562,7 +564,7 @@ namespace Falak {
             + tabs() + "call $new\n"
             + tabs() + "local.set $_temp\n";
             char[] str = node.AnchorToken.Lexeme.ToCharArray();
-            for(int i = 1; i < str.Length - 1; i++){
+            for(int i = 1; i < str.Length-1; i++){
                 regresar += tabs() + "local.get $_temp\n";
             }
             for(int i = 1; i < str.Length - 1; i++){
@@ -614,8 +616,8 @@ namespace Falak {
         public string Visit(LitArray node) {
             string regresar = tabs() + "i32.const 0\n"
             + tabs() + "call $new\n"
-            + tabs() + "local.set $_temp\n"
-            + tabs() + "local.get $_temp\n";
+            + tabs() + "local.set $_temp\n";
+            //+ tabs() + "local.get $_temp\n";
 
             ArrayBody = true;
             string regresar2 = VisitChildren((dynamic) node);

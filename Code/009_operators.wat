@@ -117,23 +117,23 @@
 			call $prints
 			call $println
 		end
-		
+		)
 	(func $some_fun
 		(result i32)
 		(local $_temp i32)
-		
+		)
 	(func $true_fun
 		(result i32)
 		(local $_temp i32)
 		i32.const 1
 		return
-		
+		)
 	(func $false_fun
 		(result i32)
 		(local $_temp i32)
 		i32.const 0
 		return
-		
+		)
 	(func $never_called
 		(result i32)
 		(local $_temp i32)
@@ -267,7 +267,7 @@
 		call $add
 		drop
 		call $assert
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -5687,4 +5687,4 @@ XOR Pendiente		i32.const 0
 		call $add
 		drop
 		call $prints
-		)
+		))

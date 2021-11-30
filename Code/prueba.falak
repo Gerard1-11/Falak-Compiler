@@ -5,12 +5,7 @@
 
 
 main() {
-    var x;
-    if (1 < 2) {
-         x = 3;
-    } elseif (4 < 5) {
-         x = 6;
-    } else {
-        x = 7;
-    }
+    var a;
+    a = 5;
+    printi(a);
 }

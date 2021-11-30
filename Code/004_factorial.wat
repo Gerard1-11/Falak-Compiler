@@ -37,16 +37,17 @@
 				local.get $result
 				i32.mul
 				local.set $result
+				local.get $i
 				i32.const 1
 				i32.add
-				global.set $inc
+				local.set $i
 
 				br $00002
 			end
 		end
 		local.get $result
 		return
-		
+		)
 	(func $recursive_factorial
 		(param $n i32)
 		(result i32)
@@ -66,7 +67,7 @@
 			i32.mul
 			return
 		end
-		
+		)
 	(func
 		(export "main")
 		(result i32)
@@ -467,4 +468,4 @@
 				br $00004
 			end
 		end
-		)
+		))
