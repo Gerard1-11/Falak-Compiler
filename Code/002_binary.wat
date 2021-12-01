@@ -21,8 +21,6 @@
 		(local $finish i32)
 		(local $temp i32)
 		i32.const 0
-		i32.const 5
-		i32.sub
 		local.set $start
 		local.get $array
 		call $size

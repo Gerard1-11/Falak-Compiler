@@ -6,7 +6,7 @@
 # Inverts in-place the contents of an array list.
 reverse(array) {
     var start, finish, temp;
-    start = -5;
+    start = 0;
     finish = size(array) - 1;
     while (start < finish) {
         temp = get(array, start);
