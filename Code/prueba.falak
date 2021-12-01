@@ -3,9 +3,9 @@
    (C) 2021 Ariel Ortiz, ITESM CEM.
 #>
 
-
 main() {
-    var a;
-    a = 5;
-    printi(a);
+    var x;
+    x = [1 + 1, 2 * 3, 13];
+    printi(get(x, 0));
+
 }
