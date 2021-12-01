@@ -64,7 +64,6 @@ i32.const 0
 		if
 			local.get $y
 			call $is_leap_year
-			drop
 			if
 				i32.const 29
 				local.set $result
@@ -126,7 +125,6 @@ i32.const 0
 		local.get $y
 		local.get $m
 		call $number_of_days_in_month
-		drop
 		i32.eq
 		if
 			local.get $m
@@ -221,6 +219,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 84
 		call $add
 		drop
@@ -287,6 +286,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 32
 		call $add
 		drop
@@ -305,12 +305,10 @@ i32.const 0
 		local.get $m
 		local.get $d
 		call $next_day
-		drop
 		local.set $next
 		local.get $next
 		i32.const 0
 		call $get
-		drop
 		call $printi
 		drop
 		i32.const 47
@@ -319,7 +317,6 @@ i32.const 0
 		local.get $next
 		i32.const 1
 		call $get
-		drop
 		call $printi
 		drop
 		i32.const 47
@@ -328,7 +325,6 @@ i32.const 0
 		local.get $next
 		i32.const 2
 		call $get
-		drop
 		call $printi
 		drop
 		call $println

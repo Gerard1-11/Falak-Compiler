@@ -78,6 +78,7 @@
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 97
 		call $add
 		drop
@@ -104,6 +105,7 @@
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 98
 		call $add
 		drop
@@ -126,6 +128,7 @@
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -239,6 +242,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 97
 		call $add
 		drop
@@ -261,6 +265,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -291,6 +296,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 99
 		call $add
 		drop
@@ -313,6 +319,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp

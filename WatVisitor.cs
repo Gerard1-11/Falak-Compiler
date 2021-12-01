@@ -35,7 +35,7 @@ namespace Falak {
         public int ret = 0;
         public string FunName;
         string block, passblock;
-        public bool VarDefinitionBody, ArrayBody;
+        public bool VarDefinitionBody, ArrayBody, isStatement, insideArray;
 
     //    void DeclareAPI()
     //     {
@@ -89,6 +89,8 @@ namespace Falak {
             this.SymbolTable = SymbolTable;
             this.VarDefinitionBody = false;
             this.ArrayBody = false;
+            this.isStatement = false;
+            this.insideArray = false;
         }
 
         //-----------------------------------------------------------
@@ -195,11 +197,15 @@ namespace Falak {
         //-----------------------------------------------------------
         public string Visit(StatementList node) {
             //Console.WriteLine("Llegue " + node.AnchorToken);
-            return VisitChildren((dynamic) node);
+            isStatement = true;
+            var regresa = VisitChildren((dynamic) node);
+            isStatement = false;
+            return regresa;
         }
 
         //-----------------------------------------------------------
         public string Visit(StatementAssign node) {
+            isStatement = false;
             if(node[0].childs() > 1 && node[0].GetType() == new ExpressionList().GetType()){
                 string arr = "";
                 foreach(var n in node[0]){
@@ -208,6 +214,7 @@ namespace Falak {
                     + tabs() + "call $add\n"
                     + tabs() + "drop\n";
                 }
+                isStatement = true;
                 return tabs() + "i32.const 0\n"
                 + tabs() + "call $new\n"
                 + tabs() + "local.set $_temp\n"
@@ -215,8 +222,10 @@ namespace Falak {
                 + arr
                 + tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
             }
-            return Visit((dynamic) node[0])
+            var regresar = Visit((dynamic) node[0])
                 + tabs() + $"{getVariableCategory(node)}.set ${node.AnchorToken.Lexeme}\n";
+            isStatement = true;
+            return regresar;
         }
 
          //-----------------------------------------------------------
@@ -237,10 +246,14 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public string Visit(StatementIf node) {
-            return Visit((dynamic) node[0])
-                + tabs(1) + "if\n"
-                + VisitChildren((dynamic) node,1)
-                + tabs(-98) + "end\n";
+            isStatement = false;
+            var regresar = Visit((dynamic) node[0])
+                + tabs(1) + "if\n";
+
+            isStatement = true;    
+            regresar += VisitChildren((dynamic) node,1)
+            + tabs(-98) + "end\n";
+            return regresar;
         }
 
         //-----------------------------------------------------------
@@ -248,11 +261,16 @@ namespace Falak {
             if (node.childs() == 0){
                 return "";
             }else{
-                return  tabs(-99) + "else\n"
+                isStatement = false;
+                var regresar =  tabs(-99) + "else\n"
                 + Visit((dynamic) node[0])
-                + tabs(1) + "if\n"
-                + VisitChildren((dynamic) node,1)
+                + tabs(1) + "if\n";
+
+                isStatement = true;
+                regresar += VisitChildren((dynamic) node,1)
                 + tabs(-98) + "end\n";
+
+                return regresar;
             }
             
         }
@@ -274,12 +292,16 @@ namespace Falak {
             block = formatNested();
             cycles += 1;
             var loop = formatNested();
+            isStatement = false;
+
             string ret = tabs(1) + $"block ${block}\n"
                 + tabs(1) + $"loop ${loop}\n\n"
                 + Visit((dynamic) node[0]) + "\n"
                 + tabs() + "i32.eqz\n"
-                + tabs() + $"br_if ${block}\n\n"
-                + Visit((dynamic) node[1]) + "\n"
+                + tabs() + $"br_if ${block}\n\n";
+            isStatement = true;
+
+            ret += Visit((dynamic) node[1]) + "\n"
                 + tabs(-1) +$"br ${loop}\n"
                 + tabs(-1) +"end\n"
                 + tabs() +"end\n";
@@ -294,16 +316,21 @@ namespace Falak {
             block = formatNested();
             cycles += 1;
             var loop = formatNested();
+            isStatement = true;
+
             string ret = tabs(1) + $"block ${block}\n"
                 + tabs(1) + $"loop ${loop}\n"
-                + Visit((dynamic) node[0]) + "\n"
-                + Visit((dynamic) node[1][0]) + "\n"
+                + Visit((dynamic) node[0]) + "\n";
+            isStatement = false;
+
+            ret += Visit((dynamic) node[1]) + "\n"
                 + tabs() + "i32.eqz\n"
                 + tabs() + $"br_if ${block}\n\n"
                 + tabs(-1) + $"br ${loop}\n"
                 + tabs(-1) + "end\n"
                 + tabs() + "end\n";
             block = passblock;
+            isStatement = true;
             return ret;
         }
 
@@ -315,6 +342,7 @@ namespace Falak {
         //-----------------------------------------------------------
         public string Visit(StatementReturn node) {
             ret = 0;
+            isStatement = false;
             if(node[0].childs() > 1 && node[0].GetType() == new ExpressionList().GetType()){
                 string arr = "";
                 foreach(var n in node[0]){
@@ -323,15 +351,19 @@ namespace Falak {
                     + tabs() + "call $add\n"
                     + tabs() + "drop\n";
                 }
-            return tabs() + "i32.const 0\n"
-            + tabs() + "call $new\n"
-            + tabs() + "local.set $_temp\n"
-            + tabs() + "local.get $_temp\n"
-            + arr
-            + tabs() + "return\n";
+
+                isStatement = true;    
+                return tabs() + "i32.const 0\n"
+                + tabs() + "call $new\n"
+                + tabs() + "local.set $_temp\n"
+                + tabs() + "local.get $_temp\n"
+                + arr
+                + tabs() + "return\n";
             }
-            return Visit((dynamic) node[0])
+            var regresa = Visit((dynamic) node[0])
             + tabs() + "return\n";
+            isStatement = true;
+            return regresa;
         }
 
         //-----------------------------------------------------------
@@ -342,6 +374,7 @@ namespace Falak {
         //-----------------------------------------------------------
         public string Visit(ExpressionList node) {
             if(ArrayBody == true){
+                
                 var regresar = "";
                 if (node.childs() > 0){
                     for(int i = 0; i <= node.childs(); i++){
@@ -408,7 +441,7 @@ namespace Falak {
             return Visit((dynamic) node[0])
                 + Visit((dynamic) node[1])
                 //+ tabs() + "i32.eq\n"
-                + tabs() + "i32.eqz\n";
+                + tabs() + "i32.ne\n";
         }
 
         //-----------------------------------------------------------
@@ -455,8 +488,8 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public string Visit(Mul node) {
-            return Visit((dynamic) node[1])
-                + Visit((dynamic) node[0])
+            return Visit((dynamic) node[0])
+                + Visit((dynamic) node[1])
                 + tabs() + "i32.mul\n";
         }
 
@@ -496,14 +529,27 @@ namespace Falak {
 
         //-----------------------------------------------------------
         public string Visit(FunCall node) {
-            if(node.childs() > 0){
-                return Visit((dynamic) node[0])
-                + tabs() +$"call ${node.AnchorToken.Lexeme}\n"
-                + tabs() + "drop\n";
-            }
-            else{
-                return tabs() + $"call ${node.AnchorToken.Lexeme}\n"
-                + tabs() + "drop\n";
+            if(isStatement == true){
+                if(node.childs() > 0){
+                    isStatement = false;
+                    var regresar = Visit((dynamic) node[0])
+                    + tabs() +$"call ${node.AnchorToken.Lexeme}\n"
+                    + tabs() + "drop\n";
+                    isStatement = true;
+                    return regresar;
+                }
+                else{
+                    return tabs() + $"call ${node.AnchorToken.Lexeme}\n"
+                    + tabs() + "drop\n";
+                }
+            }else{
+                if(node.childs() > 0){
+                    return Visit((dynamic) node[0])
+                    + tabs() +$"call ${node.AnchorToken.Lexeme}\n";
+                }
+                else{
+                    return tabs() + $"call ${node.AnchorToken.Lexeme}\n";
+                }
             }
         }
 
@@ -574,48 +620,77 @@ namespace Falak {
         public string Visit(Lit_String node) {
             string regresar = tabs() + "i32.const 0\n"
             + tabs() + "call $new\n"
-            + tabs() + "local.set $_temp\n";
+            + tabs() + "local.set $_temp\n"
+            + tabs() + "local.get $_temp\n";
             char[] str = node.AnchorToken.Lexeme.ToCharArray();
             for(int i = 1; i < str.Length-1; i++){
-                regresar += tabs() + "local.get $_temp\n";
+                if(str[i] == '\\'){
+                    i++;
+                    var regresar2 = "";
+                    if(str[i] == 'n'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == '"'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == 'r'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == 't'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == '\\'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == '\''){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                    }
+                    else if(str[i] == 'u'){
+                        regresar2 += tabs() + "local.get $_temp\n";
+                        i += 6;
+                    }
+                    regresar += regresar2;
+                }else{
+                    regresar += tabs() + "local.get $_temp\n";
+                }
             }
             for(int i = 1; i < str.Length - 1; i++){
                 
                 if(str[i] == '\\'){
-                i++;
-                int c = 0;
-                if(str[i] == 'n'){
-                    c = 10;
-                }
-                else if(str[i] == '"'){
-                    c = 34;
-                }
-                else if(str[i] == 'r'){
-                    c = 13;
-                }
-                else if(str[i] == 't'){
-                    c = 9;
-                }
-                else if(str[i] == '\\'){
-                    c = 92;
-                }
-                else if(str[i] == '\''){
-                    c = 39;
-                }
-                else if(str[i] == 'u'){
-                    string w = "";
-                    w += str[i+1];
-                    w += str[i+2];
-                    w += str[i+3];
-                    w += str[i+4];
-                    w += str[i+5];
-                    w += str[i+6];
-                    c = int.Parse(w, System.Globalization.NumberStyles.HexNumber);
-                    i += 6;
-                }
-                regresar += tabs() + "i32.const " + c + "\n";
+                    i++;
+                    int c = 0;
+                    if(str[i] == 'n'){
+                        c = 10;
+                    }
+                    else if(str[i] == '"'){
+                        c = 34;
+                    }
+                    else if(str[i] == 'r'){
+                        c = 13;
+                    }
+                    else if(str[i] == 't'){
+                        c = 9;
+                    }
+                    else if(str[i] == '\\'){
+                        c = 92;
+                    }
+                    else if(str[i] == '\''){
+                        c = 39;
+                    }
+                    else if(str[i] == 'u'){
+                        string w = "";
+                        w += str[i+1];
+                        w += str[i+2];
+                        w += str[i+3];
+                        w += str[i+4];
+                        w += str[i+5];
+                        w += str[i+6];
+                        c = int.Parse(w, System.Globalization.NumberStyles.HexNumber);
+                        i += 6;
+                    }
+                    regresar += tabs() + "i32.const " + c + "\n";
                 }else{
-                regresar += tabs() + "i32.const " + Convert.ToInt32(str[i]) + "\n";
+                    regresar += tabs() + "i32.const " + Convert.ToInt32(str[i]) + "\n";
                 }
                 regresar += tabs() + "call $add\n";
                 regresar += tabs() + "drop\n";
@@ -632,8 +707,10 @@ namespace Falak {
             //+ tabs() + "local.get $_temp\n";
 
             ArrayBody = true;
+            isStatement = false;
             string regresar2 = VisitChildren((dynamic) node);
             ArrayBody = false;
+            isStatement = true;
 
             return regresar + regresar2;
         }

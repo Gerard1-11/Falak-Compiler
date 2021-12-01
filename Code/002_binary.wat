@@ -26,7 +26,6 @@
 		local.set $start
 		local.get $array
 		call $size
-		drop
 		i32.const 1
 		i32.sub
 		local.set $finish
@@ -43,14 +42,12 @@
 				local.get $array
 				local.get $start
 				call $get
-				drop
 				local.set $temp
 				local.get $array
 				local.get $start
 				local.get $array
 				local.get $finish
 				call $get
-				drop
 				call $set
 				drop
 				local.get $array
@@ -87,6 +84,7 @@ i32.const 0
 			call $new
 			local.set $_temp
 			local.get $_temp
+			local.get $_temp
 			i32.const 48
 			call $add
 			drop
@@ -95,6 +93,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.set $result
 		block $00003
 			loop $00004
@@ -126,7 +125,6 @@ i32.const 0
 		end
 		local.get $result
 		call $reverse
-		drop
 		local.get $result
 		return
 i32.const 0
@@ -143,6 +141,7 @@ i32.const 0
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -210,11 +209,11 @@ i32.const 0
 				call $prints
 				drop
 				call $readi
-				drop
 				local.set $num
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -367,7 +366,6 @@ i32.const 0
 				drop
 				local.get $num
 				call $binary
-				drop
 				call $prints
 				drop
 				call $println
@@ -375,6 +373,7 @@ i32.const 0
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -474,11 +473,9 @@ i32.const 0
 				call $prints
 				drop
 				call $reads
-				drop
 				local.set $option
 				local.get $option
 				call $size
-				drop
 				i32.const 0
 				i32.eq
 				if
@@ -488,13 +485,21 @@ i32.const 0
 					local.get $option
 					i32.const 0
 					call $get
-					drop
 					local.set $option
 				end
 
 				local.get $option
 				i32.const 89
 				i32.eq
+				if(result i32)
+					i32.const 1
+				else
+					local.get $option
+					i32.const 121
+					i32.eq
+					i32.eqz
+					i32.eqz
+				end
 
 				i32.eqz
 				br_if $00005

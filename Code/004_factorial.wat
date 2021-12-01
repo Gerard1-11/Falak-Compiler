@@ -33,8 +33,8 @@
 				i32.eqz
 				br_if $00001
 
-				local.get $i
 				local.get $result
+				local.get $i
 				i32.mul
 				local.set $result
 				local.get $i
@@ -62,11 +62,10 @@ i32.const 0
 			return
 		else
 			local.get $n
+			local.get $n
 			i32.const 1
 			i32.sub
 			call $recursive_factorial
-			drop
-			local.get $n
 			i32.mul
 			return
 		end
@@ -84,6 +83,7 @@ i32.const 0
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -151,11 +151,11 @@ i32.const 0
 				call $prints
 				drop
 				call $readi
-				drop
 				local.set $num
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -244,7 +244,6 @@ i32.const 0
 				drop
 				local.get $num
 				call $iterative_factorial
-				drop
 				call $printi
 				drop
 				call $println
@@ -252,6 +251,7 @@ i32.const 0
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -340,7 +340,6 @@ i32.const 0
 				drop
 				local.get $num
 				call $recursive_factorial
-				drop
 				call $printi
 				drop
 				call $println
@@ -348,6 +347,7 @@ i32.const 0
 				i32.const 0
 				call $new
 				local.set $_temp
+				local.get $_temp
 				local.get $_temp
 				local.get $_temp
 				local.get $_temp
@@ -459,11 +459,9 @@ i32.const 0
 				call $prints
 				drop
 				call $reads
-				drop
 				local.set $option
 				local.get $option
 				call $size
-				drop
 				i32.const 0
 				i32.eq
 				if
@@ -473,13 +471,21 @@ i32.const 0
 					local.get $option
 					i32.const 0
 					call $get
-					drop
 					local.set $option
 				end
 
 				local.get $option
 				i32.const 89
 				i32.eq
+				if(result i32)
+					i32.const 1
+				else
+					local.get $option
+					i32.const 121
+					i32.eq
+					i32.eqz
+					i32.eqz
+				end
 
 				i32.eqz
 				br_if $00003

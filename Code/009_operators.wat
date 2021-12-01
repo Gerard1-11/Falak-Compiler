@@ -27,7 +27,7 @@
 		global.set $asserts
 		local.get $value1
 		local.get $value2
-		i32.eqz
+		i32.ne
 		if
 			global.get $fails
 			i32.const 1
@@ -36,6 +36,7 @@
 			i32.const 0
 			call $new
 			local.set $_temp
+			local.get $_temp
 			local.get $_temp
 			local.get $_temp
 			local.get $_temp
@@ -153,6 +154,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -317,6 +319,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -392,6 +395,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -503,6 +507,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -570,6 +575,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -672,6 +678,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -755,6 +762,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -814,13 +822,14 @@ i32.const 0
 		drop
 		call $assert
 		drop
-		i32.const 0
 		i32.const 0
 		i32.const 42
+		i32.const 0
 		i32.mul
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -916,12 +925,13 @@ i32.const 0
 		call $assert
 		drop
 		i32.const 42
-		i32.const 7
 		i32.const 6
+		i32.const 7
 		i32.mul
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1018,15 +1028,16 @@ i32.const 0
 		drop
 		i32.const 42
 		i32.const 0
-		i32.const 7
+		i32.const 6
 		i32.sub
 		i32.const 0
-		i32.const 6
+		i32.const 7
 		i32.sub
 		i32.mul
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1124,14 +1135,15 @@ i32.const 0
 		i32.const 0
 		i32.const 42
 		i32.sub
+		i32.const 6
 		i32.const 0
 		i32.const 7
 		i32.sub
-		i32.const 6
 		i32.mul
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1250,6 +1262,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -1327,6 +1340,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -1408,6 +1422,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -1472,6 +1487,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1549,6 +1565,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1652,6 +1669,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -1721,6 +1739,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1819,6 +1838,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -1881,6 +1901,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -1964,6 +1985,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2041,6 +2063,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2159,6 +2182,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -2237,6 +2261,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2329,6 +2354,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2437,6 +2463,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -2507,6 +2534,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2601,6 +2629,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2695,6 +2724,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2809,6 +2839,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -2883,6 +2914,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -2967,10 +2999,8 @@ i32.const 0
 		drop
 		i32.const 0
 		call $false_fun
-		drop
 		if(result i32)
 			call $never_called
-			drop
 			i32.eqz
 			i32.eqz
 		else
@@ -2979,6 +3009,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -3092,6 +3123,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -3182,6 +3214,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -3272,6 +3305,7 @@ i32.const 0
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
+		local.get $_temp
 		i32.const 101
 		call $add
 		drop
@@ -3343,6 +3377,7 @@ i32.const 0
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -3423,18 +3458,17 @@ i32.const 0
 		drop
 		i32.const 1
 		call $true_fun
-		drop
 		if(result i32)
 			i32.const 1
 		else
 			call $never_called
-			drop
 			i32.eqz
 			i32.eqz
 		end
 		i32.const 0
 		call $new
 		local.set $_temp
+		local.get $_temp
 		local.get $_temp
 		local.get $_temp
 		local.get $_temp
@@ -3517,2319 +3551,2342 @@ i32.const 0
 		i32.const 0
 		i32.eqz
 		i32.eqz
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 1
-	i32.eqz
-	i32.eqz
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.const 1
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 1
-	i32.eqz
-	i32.eqz
-	i32.const 1
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 7
-	i32.const 6
-	i32.mul
-	i32.eqz
-	i32.eqz
-	i32.const 0
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 6
-	i32.const 2
-	i32.const 3
-	i32.mul
-	i32.sub
-	i32.eqz
-	i32.eqz
-	i32.const 40
-	i32.const 2
-	i32.add
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 7
-	i32.eqz
-	i32.eqz
-	i32.const 21
-	i32.const 2
-	i32.mul
-	i32.eqz
-	i32.eqz
-	i32.xor
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 88
-	call $add
-	drop
-	i32.const 79
-	call $add
-	drop
-	i32.const 82
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 42
-	i32.eq
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 42
-	i32.const 43
-	i32.eq
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 43
-	i32.eqz
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 42
-	i32.const 42
-	i32.eqz
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 43
-	i32.lt_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 104
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 42
-	i32.const 42
-	i32.lt_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 104
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 43
-	i32.lt_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 104
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 42
-	i32.const 42
-	i32.lt_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 104
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 43
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 42
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 43
-	i32.const 42
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 103
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 43
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 1
-	i32.const 42
-	i32.const 42
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	i32.const 43
-	i32.const 42
-	i32.le_s
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 113
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	i32.const 0
-	call $some_fun
-	drop
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 102
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 99
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	call $assert
-	drop
-	global.get $fails
-	call $printi
-	drop
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 32
-	call $add
-	drop
-	i32.const 102
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 108
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 40
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 41
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 102
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 117
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 100
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 32
-	call $add
-	drop
-	call $prints
-	drop
-	global.get $asserts
-	call $printi
-	drop
-	i32.const 0
-	call $new
-	local.set $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	local.get $_temp
-	i32.const 32
-	call $add
-	drop
-	i32.const 97
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 101
-	call $add
-	drop
-	i32.const 114
-	call $add
-	drop
-	i32.const 116
-	call $add
-	drop
-	i32.const 105
-	call $add
-	drop
-	i32.const 111
-	call $add
-	drop
-	i32.const 110
-	call $add
-	drop
-	i32.const 40
-	call $add
-	drop
-	i32.const 115
-	call $add
-	drop
-	i32.const 41
-	call $add
-	drop
-	i32.const 46
-	call $add
-	drop
-	i32.const 10
-	call $add
-	drop
-	call $prints
-	drop
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 1
+		i32.eqz
+		i32.eqz
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.const 1
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 1
+		i32.eqz
+		i32.eqz
+		i32.const 1
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 6
+		i32.const 7
+		i32.mul
+		i32.eqz
+		i32.eqz
+		i32.const 0
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 6
+		i32.const 3
+		i32.const 2
+		i32.mul
+		i32.sub
+		i32.eqz
+		i32.eqz
+		i32.const 40
+		i32.const 2
+		i32.add
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 7
+		i32.eqz
+		i32.eqz
+		i32.const 2
+		i32.const 21
+		i32.mul
+		i32.eqz
+		i32.eqz
+		i32.xor
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 88
+		call $add
+		drop
+		i32.const 79
+		call $add
+		drop
+		i32.const 82
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 42
+		i32.eq
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 42
+		i32.const 43
+		i32.eq
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 43
+		i32.ne
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 42
+		i32.const 42
+		i32.ne
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 43
+		i32.lt_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 104
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 42
+		i32.const 42
+		i32.lt_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 104
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 43
+		i32.lt_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 104
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 42
+		i32.const 42
+		i32.lt_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 104
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 43
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 42
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 43
+		i32.const 42
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 103
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 43
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 1
+		i32.const 42
+		i32.const 42
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		i32.const 43
+		i32.const 42
+		i32.le_s
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 113
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		i32.const 0
+		call $some_fun
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 102
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 99
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		call $assert
+		drop
+		global.get $fails
+		call $printi
+		drop
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 32
+		call $add
+		drop
+		i32.const 102
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 108
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 40
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 41
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 102
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 117
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 100
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 32
+		call $add
+		drop
+		call $prints
+		drop
+		global.get $asserts
+		call $printi
+		drop
+		i32.const 0
+		call $new
+		local.set $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		local.get $_temp
+		i32.const 32
+		call $add
+		drop
+		i32.const 97
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 101
+		call $add
+		drop
+		i32.const 114
+		call $add
+		drop
+		i32.const 116
+		call $add
+		drop
+		i32.const 105
+		call $add
+		drop
+		i32.const 111
+		call $add
+		drop
+		i32.const 110
+		call $add
+		drop
+		i32.const 40
+		call $add
+		drop
+		i32.const 115
+		call $add
+		drop
+		i32.const 41
+		call $add
+		drop
+		i32.const 46
+		call $add
+		drop
+		i32.const 10
+		call $add
+		drop
+		call $prints
+		drop
 i32.const 0
-	
+		
 ))
