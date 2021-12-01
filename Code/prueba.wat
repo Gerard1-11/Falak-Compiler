@@ -39,11 +39,7 @@ i32.const 0
 		call $add
 		drop
 		i32.const 2
-		local.get $_temp
-		local.get $_temp
 		i32.const 3
-		call $add
-		drop
 		call $sqr
 		i32.mul
 		i32.const 2

@@ -9,6 +9,6 @@ sqr(x) {
 
 main() {
     var array;
-    array = [1, 2 * sqr(3) + 2];
+    array = [1,2 * sqr(3) + 2];
     printi(get(array,1));
 }

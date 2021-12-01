@@ -75,11 +75,7 @@ i32.const 0
 		call $add
 		drop
 		i32.const 2
-		local.get $_temp
-		local.get $_temp
 		i32.const 3
-		call $add
-		drop
 		call $sqr
 		i32.mul
 		i32.const 2
@@ -115,11 +111,7 @@ i32.const 0
 		i32.eq
 		call $add
 		drop
-		local.get $_temp
-		local.get $_temp
 		i32.const 5
-		call $add
-		drop
 		call $sqr
 		i32.const 2
 		i32.sub
@@ -133,11 +125,7 @@ i32.const 0
 		call $add
 		drop
 		i32.const 1
-		local.get $_temp
-		local.get $_temp
 		i32.const 4
-		call $add
-		drop
 		call $sqr
 		i32.add
 		call $add
@@ -145,16 +133,8 @@ i32.const 0
 		i32.const 0
 		i32.const 3
 		i32.sub
-		local.get $_temp
-		local.get $_temp
-		local.get $_temp
-		local.get $_temp
 		i32.const 2
-		call $add
-		drop
 		call $sqr
-		call $add
-		drop
 		call $sqr
 		i32.add
 		call $add
@@ -180,11 +160,7 @@ i32.const 0
 		i32.mul
 		call $add
 		drop
-		local.get $_temp
-		local.get $_temp
 		i32.const 3
-		call $add
-		drop
 		call $sqr
 		i32.const 5
 		i32.const 2
@@ -199,11 +175,7 @@ i32.const 0
 		i32.mul
 		call $add
 		drop
-		local.get $_temp
-		local.get $_temp
 		i32.const 4
-		call $add
-		drop
 		call $sqr
 		call $add
 		drop
@@ -225,11 +197,7 @@ i32.const 0
 		i32.add
 		call $add
 		drop
-		local.get $_temp
-		local.get $_temp
 		i32.const 2
-		call $add
-		drop
 		call $sqr
 		call $add
 		drop
@@ -256,11 +224,7 @@ i32.const 0
 		drop
 		i32.const 7
 		i32.const 3
-		local.get $_temp
-		local.get $_temp
 		i32.const 2
-		call $add
-		drop
 		call $sqr
 		i32.mul
 		i32.add

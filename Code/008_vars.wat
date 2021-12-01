@@ -15,10 +15,10 @@
 	(global $a (mut i32) (i32.const 0))
 
 	(func $x
-		(global $b (mut i32) (i32.const 0))
+		(param $b i32)
 		(result i32)
 		(local $_temp i32)
-		(global $c (mut i32) (i32.const 0))
+		(local $c i32)
 		i32.const 5
 		global.set $c
 		i32.const 0
