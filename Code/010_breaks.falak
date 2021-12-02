@@ -19,8 +19,6 @@ main() {
     i = 0;
     while (i < size(array)) {
         x = get(array, i);
-        printi(x);
-        println();
         inc i;
         if (x == 99) {
             break;

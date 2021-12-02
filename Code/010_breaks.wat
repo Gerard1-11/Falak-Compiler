@@ -250,11 +250,6 @@ i32.const 0
 				local.get $i
 				call $get
 				local.set $x
-				local.get $x
-				call $printi
-				drop
-				call $println
-				drop
 				local.get $i
 				i32.const 1
 				i32.add
